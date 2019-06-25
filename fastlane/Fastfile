@@ -12,8 +12,6 @@ platform :ios do
     ensure_git_branch(branch: 'master')
     # Perform Dependency-Manager compatibility tests
     compatibilityTests
-    # Perform Tests
-    tests
     # Retrieve Version from options
     version = options[:version]
     # Increment Version
