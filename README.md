@@ -1,5 +1,5 @@
 <p align="center">
-   <img width="750" src="https://raw.githubusercontent.com/SvenTiigi/ValidatedPropertyKit/gh-pages/readMeAssets/ValidatedPropertyKit.gif?token=ACZQQFSEHLD5RUAVDCDPL7C5CWUCQ" alt="ValidatedPropertyKit Logo">
+   <img width="750" src="https://raw.githubusercontent.com/SvenTiigi/ValidatedPropertyKit/gh-pages/readMeAssets/ValidatedPropertyKit.gif?token=ACZQQFSSRPFFJDC6NTL6JEC5DODWY" alt="ValidatedPropertyKit Logo">
 </p>
 
 <p align="center">
@@ -109,7 +109,7 @@ dependencies: [
 Or navigate to your Xcode project then select `Swift Packages`, click the “+” icon and search for `ValidatedPropertyKit`.
 
 <p align="center">
-<img width="80%" src="https://raw.githubusercontent.com/SvenTiigi/ValidatedPropertyKit/gh-pages/readMeAssets/XcodeSPM.png?token=ACZQQFVUGO7VIEL6BNWI5OS5DD76U" alt="Xcode SPM">
+<img width="80%" src="https://raw.githubusercontent.com/SvenTiigi/ValidatedPropertyKit/gh-pages/readMeAssets/XcodeSPM.png?token=ACZQQFUTD2N73S3AOCV666C5DODYM" alt="Xcode SPM">
 </p>
 
 ### Manually
