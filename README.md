@@ -233,7 +233,7 @@ The `keyPath` validation will allow you to specify a validation for a given `Key
 
 ```swift
 @Validated(.keyPath(\.isEnabled, .equals(true)))
-var view: UIButton?
+var button: UIButton?
 ```
 
 **Strings**
