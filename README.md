@@ -314,6 +314,12 @@ var comparable: Int?
 var comparable: Int?
 ```
 
+## Featured on
+
+* [iOS Goodies](https://ios-goodies.com/post/185888580686/week-288)
+* [iOS Dev Weekly](https://iosdevweekly.com/issues/410#start)
+* [Swift Weekly](http://digest.swiftweekly.com/issues/swift-weekly-issue-163-186066)
+* [AppCoda Weekly](http://digest.appcoda.com/issues/appcoda-weekly-issue-130-186576)
 
 ## Contributing
 Contributions are very welcome 🙌
