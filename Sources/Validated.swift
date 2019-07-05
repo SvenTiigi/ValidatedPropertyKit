@@ -54,7 +54,7 @@ public struct Validated<Value: Optionalable> {
     
     /// Bool if the current value is valid
     public var isValid: Bool {
-        return self.value.wrapped != nil
+        return self.wrappedValue.wrapped != nil
     }
     
     /// The current ValidationError
@@ -75,7 +75,7 @@ public struct Validated<Value: Optionalable> {
     // MARK: Value
     
     /// The Value
-    public var value: Value {
+    public var wrappedValue: Value {
         set {
             // Switch on isValid
             switch self.isValid(value: newValue) {
