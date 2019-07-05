@@ -37,18 +37,18 @@ public struct Validated<Value: Optionalable> {
     /// The Validation
     let validation: Validation<Value.Wrapped>
     
-    /// The validated Value
-    var validatedValue: Value = nil {
+    /// The validated value
+    public private(set) var validatedValue: Result<Value.Wrapped, ValidationError> {
         didSet {
-            // Verify wrapped value is available for validated Value
-            guard let wrapped = self.validatedValue.wrapped else {
-                // Otherwise return out of function
+            // Switch on validated value
+            switch self.validatedValue {
+            case .success(let value):
+                // If success store value to last successful validated value
+                self.lastSuccessfulValidatedValue = value
+            case .failure:
+                // In failure case return
                 return
             }
-            // Clear ValidationError
-            self.validationError = nil
-            // Initialize last successful validated value
-            self.lastSuccessfulValidatedValue = .init(wrapped)
         }
     }
     
@@ -58,10 +58,20 @@ public struct Validated<Value: Optionalable> {
     }
     
     /// The current ValidationError
-    public var validationError: ValidationError?
+    public var validationError: ValidationError? {
+        // Switch on validated value
+        switch self.validatedValue {
+        case .success:
+            // Return nil
+            return nil
+        case .failure(let error):
+            // Return error
+            return error
+        }
+    }
     
     /// The last successful validated Value
-    var lastSuccessfulValidatedValue: Value?
+    var lastSuccessfulValidatedValue: Value.Wrapped?
     
     // MARK: Initializer
     
@@ -70,6 +80,7 @@ public struct Validated<Value: Optionalable> {
     /// - Parameter validation: The Validation
     public init(_ validation: Validation<Value.Wrapped>) {
         self.validation = validation
+        self.validatedValue = .failure(.nilError)
     }
     
     // MARK: Value
@@ -77,21 +88,19 @@ public struct Validated<Value: Optionalable> {
     /// The Value
     public var wrappedValue: Value {
         set {
-            // Switch on isValid
-            switch self.isValid(value: newValue) {
-            case .success(let value):
-                // Set validated value
-                self.validatedValue = value
-            case .failure(let error):
-                // Set ValidationError
-                self.validationError = error
-                // Clear validated value as Validation failed
-                self.validatedValue = nil
-            }
+            // Set validated value by validating the new value
+            self.validatedValue = self.isValid(value: newValue)
         }
         get {
-            // Return validated value
-            return self.validatedValue
+            // Switch on validated value
+            switch self.validatedValue {
+            case .success(let value):
+                // Return value
+                return .init(value)
+            case .failure:
+                // Return nil
+                return nil
+            }
         }
     }
     
@@ -105,14 +114,14 @@ extension Validated: Validatable {
     ///
     /// - Parameter value: The Value that should be validated
     /// - Returns: A Result if the validation succeeded or failed
-    func isValid(value: Value) -> Result<Value, ValidationError> {
+    func isValid(value: Value) -> Result<Value.Wrapped, ValidationError> {
         // Verify wrapped value is available
         guard let wrappedValue = value.wrapped else {
-            // Wrapped value is not available return false
-            return .failure("Value is nil and can't be validated")
+            // Wrapped value is not available return failure with nil error
+            return .failure(.nilError)
         }
         // Return value validation result
-        return self.validation.isValid(value: wrappedValue).map { value }
+        return self.validation.isValid(value: wrappedValue).map { wrappedValue }
     }
     
 }
@@ -129,12 +138,21 @@ public extension Validated {
         // Verify last successful validated value is available
         guard let lastSuccessfulValidatedValue = self.lastSuccessfulValidatedValue else {
             // The last successful validated value is not available return nil
-            return .init(nilLiteral: ())
+            return nil
         }
         // Set validated value with last successful validated value
-        self.validatedValue = lastSuccessfulValidatedValue
+        self.validatedValue = .success(lastSuccessfulValidatedValue)
         // Return value
-        return lastSuccessfulValidatedValue
+        return .init(lastSuccessfulValidatedValue)
     }
+    
+}
+
+// MARK: - ValidationError+nilError
+
+private extension ValidationError {
+    
+    /// The `nil` ValidationError
+    static let nilError: ValidationError = "Value is nil and can't be validated"
     
 }
