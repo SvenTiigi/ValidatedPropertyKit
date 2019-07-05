@@ -29,7 +29,7 @@ import Foundation
  var email: String?
  ```
  */
-//@propertyWrapper
+@propertyWrapper
 public struct Validated<Value: Optionalable> {
     
     // MARK: Properties
