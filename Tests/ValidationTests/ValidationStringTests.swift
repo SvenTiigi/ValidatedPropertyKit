@@ -29,9 +29,9 @@ class ValidationStringTests: XCTestCase {
         let substring1 = String(string.prefix(.random(in: 0..<string.count)))
         let substring2 = UUID().uuidString
         let validation1 = Validation<String>.contains(substring1, options: .caseInsensitive)
-        XCTAssert(validation1.isValid(value: string))
+        XCTAssert(validation1.isValid(value: string).isSuccess)
         let validation2 = Validation<String>.contains(substring2)
-        XCTAssertFalse(validation2.isValid(value: string))
+        XCTAssertFalse(validation2.isValid(value: string).isSuccess)
     }
     
     func testHasPrefix() {
@@ -39,9 +39,9 @@ class ValidationStringTests: XCTestCase {
         let substring1 = String(string.prefix(.random(in: 0..<string.count)))
         let substring2 = UUID().uuidString
         let validation1 = Validation<String>.hasPrefix(substring1)
-        XCTAssert(validation1.isValid(value: string))
+        XCTAssert(validation1.isValid(value: string).isSuccess)
         let validation2 = Validation<String>.hasPrefix(substring2)
-        XCTAssertFalse(validation2.isValid(value: string))
+        XCTAssertFalse(validation2.isValid(value: string).isSuccess)
     }
     
     func testHasSuffx() {
@@ -49,9 +49,9 @@ class ValidationStringTests: XCTestCase {
         let substring1 = String(string.suffix(.random(in: 0..<string.count)))
         let substring2 = UUID().uuidString
         let validation1 = Validation<String>.hasSuffix(substring1)
-        XCTAssert(validation1.isValid(value: string))
+        XCTAssert(validation1.isValid(value: string).isSuccess)
         let validation2 = Validation<String>.hasSuffix(substring2)
-        XCTAssertFalse(validation2.isValid(value: string))
+        XCTAssertFalse(validation2.isValid(value: string).isSuccess)
     }
     
     func testRegularExpressionPattern() {
@@ -60,33 +60,33 @@ class ValidationStringTests: XCTestCase {
         let invalidString = "ABCDEFGHIJ"
         let invalidRegularExpressionPattern = ""
         let validatation = Validation<String>.regularExpression(validRegularExpressionPattern)
-        XCTAssert(validatation.isValid(value: validString))
-        XCTAssertFalse(validatation.isValid(value: invalidString))
+        XCTAssert(validatation.isValid(value: validString).isSuccess)
+        XCTAssertFalse(validatation.isValid(value: invalidString).isSuccess)
         let validation2 = Validation<String>.regularExpression(invalidRegularExpressionPattern)
-        XCTAssertFalse(validation2.isValid(value: validString))
-        XCTAssertFalse(validation2.isValid(value: invalidString))
+        XCTAssertFalse(validation2.isValid(value: validString).isSuccess)
+        XCTAssertFalse(validation2.isValid(value: invalidString).isSuccess)
     }
     
     func testLowercased() {
         let string = UUID().uuidString
         let validation = Validation<String>.isLowercased
-        XCTAssert(validation.isValid(value: string.lowercased()))
-        XCTAssertFalse(validation.isValid(value: string.uppercased()))
+        XCTAssert(validation.isValid(value: string.lowercased()).isSuccess)
+        XCTAssertFalse(validation.isValid(value: string.uppercased()).isSuccess)
     }
     
     func testUppercased() {
         let string = UUID().uuidString
         let validation = Validation<String>.isUppercased
-        XCTAssert(validation.isValid(value: string.uppercased()))
-        XCTAssertFalse(validation.isValid(value: string.lowercased()))
+        XCTAssert(validation.isValid(value: string.uppercased()).isSuccess)
+        XCTAssertFalse(validation.isValid(value: string.lowercased()).isSuccess)
     }
     
     func testEmail() {
         let validation = Validation<String>.isEmail
         let validEMail = "mr.robot@fsociety.com"
         let invalidEMail = UUID().uuidString
-        XCTAssert(validation.isValid(value: validEMail))
-        XCTAssertFalse(validation.isValid(value: invalidEMail))
+        XCTAssert(validation.isValid(value: validEMail).isSuccess)
+        XCTAssertFalse(validation.isValid(value: invalidEMail).isSuccess)
     }
     
     func testURL() {
@@ -95,18 +95,18 @@ class ValidationStringTests: XCTestCase {
         let validURL2 = "http://www.google.de"
         let validURL3 = "https://google.de"
         let invalidURL = UUID().uuidString
-        XCTAssert(validation.isValid(value: validURL))
-        XCTAssert(validation.isValid(value: validURL2))
-        XCTAssert(validation.isValid(value: validURL3))
-        XCTAssertFalse(validation.isValid(value: invalidURL))
+        XCTAssert(validation.isValid(value: validURL).isSuccess)
+        XCTAssert(validation.isValid(value: validURL2).isSuccess)
+        XCTAssert(validation.isValid(value: validURL3).isSuccess)
+        XCTAssertFalse(validation.isValid(value: invalidURL).isSuccess)
     }
     
     func testNumeric() {
         let validation = Validation<String>.isNumeric
         let validFloat = "100"
         let invalidFloat = "ABCDEFGHIJ"
-        XCTAssert(validation.isValid(value: validFloat))
-        XCTAssertFalse(validation.isValid(value: invalidFloat))
+        XCTAssert(validation.isValid(value: validFloat).isSuccess)
+        XCTAssertFalse(validation.isValid(value: invalidFloat).isSuccess)
     }
     
 }

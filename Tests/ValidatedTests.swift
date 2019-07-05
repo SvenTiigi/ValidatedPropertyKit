@@ -19,7 +19,11 @@ class ValidatedTests: XCTestCase {
         let validValue = 1
         let invalidValue = 0
         var validated = Validated<Int?>(.init { value in
-            return value == validValue
+            if value == validValue {
+                return .success(())
+            } else {
+                return .failure("")
+            }
         })
         XCTAssertNil(validated.restore())
         XCTAssertNil(validated.value)

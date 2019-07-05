@@ -19,7 +19,12 @@ public extension Validation {
     static prefix func ! (_ validation: Validation) -> Validation {
         return .init { value in
             // Return negated validation result
-            return !validation.isValid(value: value)
+            switch validation.isValid(value: value) {
+            case .success:
+                return .failure("Validation should not be successful")
+            case .failure:
+                return .success
+            }
         }
     }
     
@@ -38,7 +43,16 @@ public extension Validation {
     static func && (lhs: Validation, rhs: @autoclosure @escaping () -> Validation) -> Validation {
         return .init { value in
             // Return logical AND operation result
-            return lhs.isValid(value: value) && rhs().isValid(value: value)
+            switch (lhs.isValid(value: value), rhs().isValid(value: value)) {
+            case (.success, .success):
+                return .success
+            case (.success, .failure(let error)):
+                return .failure(error)
+            case (.failure(let error), .success):
+                return .failure(error)
+            case (.failure(let lhsError), .failure(let rhsError)):
+                return .failure(.init(messages: lhsError.messages + rhsError.messages))
+            }
         }
     }
     
@@ -57,7 +71,16 @@ public extension Validation {
     static func || (lhs: Validation, rhs: @autoclosure @escaping () -> Validation) -> Validation {
         return .init { value in
             // Return logical OR operation result
-            return lhs.isValid(value: value) || rhs().isValid(value: value)
+            switch (lhs.isValid(value: value), rhs().isValid(value: value)) {
+            case (.success, .success):
+                return .success
+            case (.success, .failure):
+                return .success
+            case (.failure, .success):
+                return .success
+            case (.failure(let lhsError), .failure(let rhsError)):
+                return .failure(.init(messages: lhsError.messages + rhsError.messages))
+            }
         }
     }
     

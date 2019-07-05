@@ -29,7 +29,7 @@ import Foundation
  var email: String?
  ```
  */
-@propertyWrapper
+//@propertyWrapper
 public struct Validated<Value: Optionalable> {
     
     // MARK: Properties
@@ -45,6 +45,8 @@ public struct Validated<Value: Optionalable> {
                 // Otherwise return out of function
                 return
             }
+            // Clear ValidationError
+            self.validationError = nil
             // Initialize last successful validated value
             self.lastSuccessfulValidatedValue = .init(wrapped)
         }
@@ -54,6 +56,9 @@ public struct Validated<Value: Optionalable> {
     public var isValid: Bool {
         return self.value.wrapped != nil
     }
+    
+    /// The current ValidationError
+    public var validationError: ValidationError?
     
     /// The last successful validated Value
     var lastSuccessfulValidatedValue: Value?
@@ -72,13 +77,15 @@ public struct Validated<Value: Optionalable> {
     /// The Value
     public var value: Value {
         set {
-            // Check if new value is valid
-            if self.isValid(value: newValue) {
-                // Set new value to validated value
-                self.validatedValue = newValue
-            } else {
-                // As the new value is invalid
-                // set validated value to nil
+            // Switch on isValid
+            switch self.isValid(value: newValue) {
+            case .success(let value):
+                // Set validated value
+                self.validatedValue = value
+            case .failure(let error):
+                // Set ValidationError
+                self.validationError = error
+                // Clear validated value as Validation failed
                 self.validatedValue = nil
             }
         }
@@ -97,15 +104,15 @@ extension Validated: Validatable {
     /// Validate the Value
     ///
     /// - Parameter value: The Value that should be validated
-    /// - Returns: A Bool if the given Value is valid or not
-    public func isValid(value: Value) -> Bool {
+    /// - Returns: A Result if the validation succeeded or failed
+    func isValid(value: Value) -> Result<Value, ValidationError> {
         // Verify wrapped value is available
-        guard let value = value.wrapped else {
+        guard let wrappedValue = value.wrapped else {
             // Wrapped value is not available return false
-            return false
+            return .failure("Value is nil and can't be validated")
         }
         // Return value validation result
-        return self.validation.isValid(value: value)
+        return self.validation.isValid(value: wrappedValue).map { value }
     }
     
 }

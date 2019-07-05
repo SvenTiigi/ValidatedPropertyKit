@@ -20,7 +20,14 @@ public extension Validation {
     /// - Returns: The new Validation
     static func == (lhs: Validation, rhs: Validation) -> Validation {
         return .init { value in
-            return lhs.isValid(value: value) == rhs.isValid(value: value)
+            switch (lhs.isValid(value: value), rhs.isValid(value: value)) {
+            case (.success, .success):
+                return .success
+            case (.failure, .failure):
+                return .success
+            default:
+                return .failure("Exprected Validations to be equal but they are not equal")
+            }
         }
     }
     
@@ -38,7 +45,14 @@ public extension Validation {
     /// - Returns: The new Validation
     static func != (lhs: Validation, rhs: Validation) -> Validation {
         return .init { value in
-            return lhs.isValid(value: value) != rhs.isValid(value: value)
+            switch (lhs.isValid(value: value), rhs.isValid(value: value)) {
+            case (.success, .failure):
+                return .success
+            case (.failure, .success):
+                return .success
+            default:
+                return .failure("Expected Validations two be unequal but they are equal")
+            }
         }
     }
     

@@ -21,7 +21,11 @@ public extension Validation where Value: StringProtocol {
     static func contains<S: StringProtocol>(_ string: S,
                                             options: NSString.CompareOptions = .init()) -> Validation {
         return .init { value in
-            return value.range(of: string, options: options) != nil
+            if value.range(of: string, options: options) != nil {
+                return .success
+            } else {
+                return .failure("\(value) does not contain \(string)")
+            }
         }
     }
     
@@ -31,7 +35,11 @@ public extension Validation where Value: StringProtocol {
     /// - Returns: A Validation
     static func hasPrefix<S: StringProtocol>(_ prefix: S) -> Validation {
         return .init { value in
-            return value.hasPrefix(prefix)
+            if value.hasPrefix(prefix) {
+                return .success
+            } else {
+                return .failure("\(value) has no prefix: \(prefix)")
+            }
         }
     }
     
@@ -41,7 +49,11 @@ public extension Validation where Value: StringProtocol {
     /// - Returns: A Validation
     static func hasSuffix<S: StringProtocol>(_ suffix: S) -> Validation {
         return .init { value in
-            return value.hasSuffix(suffix)
+            if value.hasSuffix(suffix) {
+                return .success
+            } else {
+                return .failure("\(value) has no suffix: \(suffix)")
+            }
         }
     }
     
@@ -63,8 +75,8 @@ public extension Validation where Value == String {
                                   matchingOptions: NSRegularExpression.MatchingOptions = .init()) -> Validation {
         // Verify NSRegularExpression can be constructed with String Pattern
         guard let regularExpression = try? NSRegularExpression(pattern: pattern, options: options) else {
-            // Otherwise return Validation that will always fail
-            return .init { _ in false }
+            // Otherwise return Validation with failure
+            return .init { _ in .failure("Invalid regular expression: \(pattern)") }
         }
         // Return RegularExpression Validation
         return self.regularExpression(
@@ -82,12 +94,18 @@ public extension Validation where Value == String {
     static func regularExpression(_ regularExpression: NSRegularExpression,
                                   matchingOptions: NSRegularExpression.MatchingOptions = .init()) -> Validation {
         return .init { value in
-            // Return Bool if RegularExpression first match is not nil
-            return regularExpression.firstMatch(
+            // Initialize firstMatch is available Bool value
+            let firstMatchIsAvailable = regularExpression.firstMatch(
                 in: value,
                 options: matchingOptions,
                 range: .init(value.startIndex..., in: value)
             ) != nil
+            // Check if first match is available
+            if firstMatchIsAvailable {
+                return .success
+            } else {
+                return .failure("The regular expression does not match the subject string")
+            }
         }
     }
     

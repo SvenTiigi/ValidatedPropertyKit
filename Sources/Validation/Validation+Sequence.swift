@@ -18,7 +18,11 @@ public extension Validation where Value: Sequence, Value.Element: Equatable {
     /// - Returns: The contains elements Validation
     static func contains(_ elements: Value.Element...) -> Validation {
         return .init { value in
-            return elements.map(value.contains).contains(true)
+            if elements.map(value.contains).contains(true) {
+                return .success
+            } else {
+                return .failure("(\(elements)) are not contained in \(value)")
+            }
         }
     }
     
@@ -29,7 +33,11 @@ public extension Validation where Value: Sequence, Value.Element: Equatable {
     /// - Returns: The startsWith elements Validation
     static func startsWith(_ elements: Value.Element...) -> Validation {
         return .init { value in
-            return value.starts(with: elements)
+            if value.starts(with: elements) {
+                return .success
+            } else {
+                return .failure("\(value) is not starting with \(elements)")
+            }
         }
     }
     

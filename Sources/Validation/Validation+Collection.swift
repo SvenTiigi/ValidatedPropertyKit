@@ -15,7 +15,11 @@ public extension Validation where Value: Collection {
     /// The non empty Validation
     static var nonEmpty: Validation {
         return .init { value in
-            return !value.isEmpty
+            if !value.isEmpty {
+                return .success
+            } else {
+                return .failure("Is empty")
+            }
         }
     }
     
@@ -25,7 +29,11 @@ public extension Validation where Value: Collection {
     /// - Returns: The Range Validation
     static func range<R: RangeExpression>(_ range: R) -> Validation where R.Bound == Int {
         return .init { value in
-            return range.contains(value.count)
+            if range.contains(value.count) {
+                return .success
+            } else {
+                return .failure("Range (\(range)) is out of bounds")
+            }
         }
     }
     
