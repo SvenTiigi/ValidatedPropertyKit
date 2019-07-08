@@ -47,17 +47,11 @@ struct User {
     @Validated(.range(8...))
     var password: String?
     
-    @Validated(.greaterOrEqual(13))
-    var age: Int?
+    @Validated(.greaterOrEqual(1))
+    var friends: Int?
     
-    @Validated(.isURL && .hasSuffix("jpg"))
+    @Validated(.isURL && .hasPrefix("https"))
     var avatarURL: String?
-    
-    @Validated(!.contains("Android", options: .caseInsensitive))
-    var favoriteOperatingSystem: String?
-    
-    @Validated(.init { $0.first == "+" })
-    var phoneNumber: String?
     
 }
 ```
@@ -102,7 +96,7 @@ To integrate using Apple's [Swift Package Manager](https://swift.org/package-man
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/SvenTiigi/ValidatedPropertyKit.git", from: "1.0.0")
+    .package(url: "https://github.com/SvenTiigi/ValidatedPropertyKit.git", from: "0.0.1")
 ]
 ```
 
@@ -141,9 +135,9 @@ Every `@Validated` attribute must be initialized with a `Validation` which simpl
 
 ```swift
 @Validated(.init { value in
-    value.first == "+"
+    value.first == "A"
 })
-var phoneNumber: String?
+var status: String?
 ```
 > ☝️ Check out the [Predefined Validations](https://github.com/SvenTiigi/ValidatedPropertyKit#predefined-validations) section to get an overview of the many predefined validations.
 
@@ -211,7 +205,7 @@ Validation Operators allowing you to combine multiple Validations like you would
 
 ```swift
 // Logical AND
-@Validated(.isURL && .hasSuffix("jpg"))
+@Validated(.isURL && .hasPrefix("https"))
 var avatarURL: String?
 
 // Logical OR
@@ -320,6 +314,12 @@ var comparable: Int?
 var comparable: Int?
 ```
 
+## Featured on
+
+* [iOS Goodies](https://ios-goodies.com/post/185888580686/week-288)
+* [iOS Dev Weekly](https://iosdevweekly.com/issues/410#start)
+* [Swift Weekly](http://digest.swiftweekly.com/issues/swift-weekly-issue-163-186066)
+* [AppCoda Weekly](http://digest.appcoda.com/issues/appcoda-weekly-issue-130-186576)
 
 ## Contributing
 Contributions are very welcome 🙌
