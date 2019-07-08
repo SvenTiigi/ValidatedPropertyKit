@@ -14,7 +14,7 @@ import Foundation
  The `@Validated` PropertyWrapper
  
  Based on the given `Validation` during the initialization of the `@Validated` PropertyWrapper
- each new `Value` that is going to be set will get `validated` by the `Validation`.
+ each new `Value` that is going to be set will be `validated` by the `Validation`.
  
  If the validation fails the `Value` will become `nil`.
  
@@ -23,10 +23,27 @@ import Foundation
  - Important:
  `@Validated` can only be applied to `Optional` types.
  
- # Usage:
+ # Example:
  ```
- @Validated(.email)
+ // Username will be nil if String is empty
+ @Validated(.nonEmpty)
+ var username: String?
+ 
+ // Email will be nil if String isn't a valid E-Mail address
+ @Validated(.isEmail)
  var email: String?
+ 
+ // Password will be nil if String is less than 8 characters
+ @Validated(.range(8...))
+ var password: String?
+ 
+ // Friends will be nil if Int is less than 1
+ @Validated(.greaterOrEqual(1))
+ var friends: Int?
+ 
+ // AvatarURL will be nil if String isn't a valid URL and hasn't a "https" prefix
+ @Validated(.isURL && .hasPrefix("https"))
+ var avatarURL: String?
  ```
  */
 @propertyWrapper
