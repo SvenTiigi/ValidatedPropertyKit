@@ -13,16 +13,19 @@ import Foundation
 /// THe Validatable
 protocol Validatable {
     
-    /// The Value
+    /// The Value type
     associatedtype Value
     
-    /// The Success value
+    /// The Success type
     associatedtype Success
+    
+    /// The Failure type
+    associatedtype Failure: Error
     
     /// Validate the Value
     ///
     /// - Parameter value: The Value that should be validated
     /// - Returns: A Result if the validation succeeded or failed
-    func isValid(value: Value) -> Result<Success, ValidationError>
+    func isValid(value: Value) -> Result<Success, Failure>
     
 }
