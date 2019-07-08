@@ -26,7 +26,7 @@ import Foundation
  @Validated(.nonEmpty)
  var username: String?
  
- // AvatarURL will be nil if String isn't a valid URL and hasn't a "https" prefix
+ // AvatarURL will be nil if String isn't a valid URL and has a "https" prefix
  @Validated(.isURL && .hasPrefix("https"))
  var avatarURL: String?
  ```
