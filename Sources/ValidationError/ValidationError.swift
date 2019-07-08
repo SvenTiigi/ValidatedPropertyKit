@@ -42,12 +42,23 @@ extension ValidationError: LocalizedError {
     
     /// A localized message describing what error occurred.
     public var errorDescription: String? {
-        return self.messages.joined(separator: "\n")
+        return self.description
     }
     
     /// A localized message describing the reason for the failure.
     public var failureReason: String? {
-        return self.errorDescription
+        return self.description
+    }
+    
+}
+
+// MARK: - CustomStringConvertible
+
+extension ValidationError: CustomStringConvertible {
+    
+    /// A textual representation of this instance.
+    public var description: String {
+        return self.messages.joined(separator: "\n")
     }
     
 }
