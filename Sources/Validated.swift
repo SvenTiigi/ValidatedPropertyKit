@@ -11,16 +11,13 @@ import Foundation
 // MARK: - Validated
 
 /**
- The `@Validated` PropertyWrapper
+ The `@Validated` PropertyWrapper to easily validate your properties 👮
  
  Based on the given `Validation` during the initialization of the `@Validated` PropertyWrapper
  each new `Value` that is going to be set will be `validated` by the `Validation`.
- 
  If the validation fails the `Value` will become `nil`.
  
- By using the `restore()` function you can restore the value to its last successful valiated value
- 
- - Important:
+ # Important:
  `@Validated` can only be applied to `Optional` types.
  
  # Example:
@@ -29,22 +26,88 @@ import Foundation
  @Validated(.nonEmpty)
  var username: String?
  
- // Email will be nil if String isn't a valid E-Mail address
- @Validated(.isEmail)
- var email: String?
- 
- // Password will be nil if String is less than 8 characters
- @Validated(.range(8...))
- var password: String?
- 
- // Friends will be nil if Int is less than 1
- @Validated(.greaterOrEqual(1))
- var friends: Int?
- 
  // AvatarURL will be nil if String isn't a valid URL and hasn't a "https" prefix
  @Validated(.isURL && .hasPrefix("https"))
  var avatarURL: String?
  ```
+ 
+ # Error Handling 🕵️‍♂️
+ Beside doing a simple `nil` check on your `@Validated` property to ensure if the value is valid or not
+ you can access the validatedValue or validationError property to retrieve the `ValidationError` or the valid value.
+ 
+ ```
+ @Validated(.nonEmpty)
+ var username: String?
+ 
+ // Switch on `validatedValue`
+ switch $username.validatedValue {
+ case .success(let value):
+     // Value is valid ✅
+     break
+ case .failure(let validationError):
+     // Value is invalid ⛔️
+     break
+ }
+ 
+ // Or unwrap the `validationError`
+ if let validationError = $username.validationError {
+     // Value is invalid ⛔️
+ } else {
+     // Value is valid ✅
+ }
+ ```
+ 
+ # Restore ↩️
+ 
+ You can `restore` your `@Validated` property to the last successful validated value.
+ 
+ ```
+ @Validated(.nonEmpty)
+ var username: String?
+ 
+ username = "Mr.Robot"
+ print(username) // "Mr.Robot"
+ 
+ username = ""
+ print(username) // nil
+ 
+ // Restore to last successful validated value
+ $username.restore()
+ print(username) // "Mr.Robot"
+ ```
+ 
+ # isValid ✅
+ 
+ You can access the isValid Bool value property to check if the current value is valid.
+ 
+ ```
+ @Validated(.nonEmpty)
+ var username: String?
+ 
+ username = "Mr.Robot"
+ print($username.isValid) // true
+ 
+ username = ""
+ print($username.isValid) // false
+ ```
+ 
+ # Validation Operators 🔗
+ Validation Operators allowing you to combine multiple Validations like you would do with Bool values.
+ 
+ ```
+ // Logical AND
+ @Validated(.isURL && .hasPrefix("https"))
+ var avatarURL: String?
+ 
+ // Logical OR
+ @Validated(.hasPrefix("Mr.") || .hasPrefix("Mrs."))
+ var name: String?
+ 
+ // Logical NOT
+ @Validated(!.contains("Android", options: .caseInsensitive))
+ var favoriteOperatingSystem: String?
+ ```
+ 
  */
 @propertyWrapper
 public struct Validated<Value: Optionalable> {
