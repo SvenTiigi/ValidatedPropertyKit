@@ -83,6 +83,16 @@ public struct Validated<Value: Optionalable> {
         self.validatedValue = .failure(.nilError)
     }
     
+    /// Designated Initializer
+    ///
+    /// - Parameter initialValue: The initial Value
+    /// - Parameter validation: The Validation
+    public init(initialValue: Value,
+                _ validation: Validation<Value.Wrapped>) {
+        self.init(validation)
+        self.wrappedValue = initialValue
+    }
+    
     // MARK: Value
     
     /// The Value
