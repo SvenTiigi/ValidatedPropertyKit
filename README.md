@@ -131,13 +131,13 @@ print(username) // nil
 
 ### Validation 🚦
 
-Every `@Validated` attribute must be initialized with a `Validation` which simply takes a `(Value) -> Bool` closure.
+Every `@Validated` attribute must be initialized with a `Validation` which will be initialized with a closure.
 
 ```swift
 @Validated(.init { value in
-    value.first == "A"
+   value.isEmpty ? .failure("String is empty") : .success(())
 })
-var status: String?
+var username: String?
 ```
 > ☝️ Check out the [Predefined Validations](https://github.com/SvenTiigi/ValidatedPropertyKit#predefined-validations) section to get an overview of the many predefined validations.
 
@@ -149,7 +149,7 @@ extension Validation where Value == Int {
     /// Will validate if the Integer is the meaning of life
     static var isMeaningOfLife: Validation {
         return .init { value in
-            return value == 42
+            value == 42 ? .success(()) : .failure("\(value) isn't the meaning of life")
         }
     }
 
@@ -163,11 +163,38 @@ And apply them to your validated property.
 var number: Int?
 ```
 
+### Error Handling 🕵️‍♂️
+
+Each property that is declared with the `@Validated` attribute can make use of advanced functions and properties from the `Validated` Property Wrapper itself via the `$` notation prefix.
+
+Beside doing a simple `nil` check on your `@Validated` property to ensure if the value is valid or not you can access the `validatedValue` or `validationError` property to retrieve the `ValidationError` or the valited value.
+
+```swift
+@Validated(.nonEmpty)
+var username: String?
+
+// Switch on `validatedValue`
+switch $username.validatedValue {
+case .success(let value):
+    // Value is valid ✅
+    break
+case .failure(let validationError):
+    // Value is invalid ⛔️
+    break
+}
+
+// Or unwrap the `validationError`
+if let validationError = $username.validationError {
+    // Value is invalid ⛔️
+} else {
+    // Value is valid ✅
+}
+
+```
+
 ### Restore ↩️
 
-Each property that is declared with the `@Validated` attribute can make use of the `restore()` function from the `Validated` Property Wrapper itself via the `$` notation prefix.
-
-When invoking `$property.restore()` the value will get restored to the last successful validated value.
+Additionally, you can `restore` your `@Validated` property to the last successful validated value.
 
 ```swift
 @Validated(.nonEmpty)
