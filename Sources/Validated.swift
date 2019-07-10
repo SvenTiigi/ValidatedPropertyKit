@@ -204,7 +204,7 @@ extension Validated: Validatable {
     ///
     /// - Parameter value: The Value that should be validated
     /// - Returns: A Result if the validation succeeded or failed
-    func isValid(value: Value) -> Result<Value.Wrapped, ValidationError> {
+    public func isValid(value: Value) -> Result<Value.Wrapped, ValidationError> {
         // Verify wrapped value is available
         guard let wrappedValue = value.wrapped else {
             // Wrapped value is not available return failure with nil error

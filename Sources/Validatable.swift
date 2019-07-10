@@ -10,8 +10,8 @@ import Foundation
 
 // MARK: - Validatable
 
-/// THe Validatable
-protocol Validatable {
+/// The Validatable
+public protocol Validatable {
     
     /// The Value type
     associatedtype Value
