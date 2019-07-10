@@ -18,7 +18,11 @@ public extension Validation where Value: Comparable {
     /// - Returns: The Validation
     static func less(_ comparableValue: Value) -> Validation {
         return .init { value in
-            return value < comparableValue
+            if value < comparableValue {
+                return .success
+            } else {
+                return .failure("\(value) is not less than \(comparableValue)")
+            }
         }
     }
     
@@ -28,7 +32,11 @@ public extension Validation where Value: Comparable {
     /// - Returns: The Validation
     static func lessOrEqual(_ comparableValue: Value) -> Validation {
         return .init { value in
-            return value <= comparableValue
+            if value <= comparableValue {
+                return .success
+            } else {
+                return .failure("\(value) is not less or equal than \(comparableValue)")
+            }
         }
     }
     
@@ -38,7 +46,11 @@ public extension Validation where Value: Comparable {
     /// - Returns: The Validation
     static func greater(_ comparableValue: Value) -> Validation {
         return .init { value in
-            return value > comparableValue
+            if value > comparableValue {
+                return .success
+            } else {
+                return .failure("\(value) is not greater than \(comparableValue)")
+            }
         }
     }
     
@@ -48,7 +60,11 @@ public extension Validation where Value: Comparable {
     /// - Returns: The Validation
     static func greaterOrEqual(_ comparableValue: Value) -> Validation {
         return .init { value in
-            return value >= comparableValue
+            if value >= comparableValue {
+                return .success
+            } else {
+                return .failure("\(value) is not greater or equal than \(comparableValue)")
+            }
         }
     }
     

@@ -19,21 +19,25 @@ class ValidatedTests: XCTestCase {
         let validValue = 1
         let invalidValue = 0
         var validated = Validated<Int?>(.init { value in
-            return value == validValue
+            if value == validValue {
+                return .success(())
+            } else {
+                return .failure("")
+            }
         })
         XCTAssertNil(validated.restore())
-        XCTAssertNil(validated.value)
-        validated.value = validValue
-        XCTAssertEqual(validValue, validated.value)
+        XCTAssertNil(validated.wrappedValue)
+        validated.wrappedValue = validValue
+        XCTAssertEqual(validValue, validated.wrappedValue)
         XCTAssert(validated.isValid)
-        validated.value = invalidValue
-        XCTAssertNil(validated.value)
+        validated.wrappedValue = invalidValue
+        XCTAssertNil(validated.wrappedValue)
         XCTAssertFalse(validated.isValid)
         XCTAssertEqual(validValue, validated.lastSuccessfulValidatedValue)
         validated.restore()
-        XCTAssertEqual(validValue, validated.value)
-        validated.value = nil
-        XCTAssertNil(validated.value)
+        XCTAssertEqual(validValue, validated.wrappedValue)
+        validated.wrappedValue = nil
+        XCTAssertNil(validated.wrappedValue)
     }
     
 }

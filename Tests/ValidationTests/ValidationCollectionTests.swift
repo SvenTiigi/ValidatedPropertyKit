@@ -20,8 +20,8 @@ class ValidationCollectionTests: XCTestCase {
         let validStrings = ["1"]
         let invalidStrings: [String] = .init()
         let validation = Validation<[String]>.nonEmpty
-        XCTAssert(validation.isValid(value: validStrings))
-        XCTAssertFalse(validation.isValid(value: invalidStrings))
+        XCTAssert(validation.isValid(value: validStrings).isSuccess)
+        XCTAssertFalse(validation.isValid(value: invalidStrings).isSuccess)
     }
     
     func testRange() {
@@ -36,10 +36,10 @@ class ValidationCollectionTests: XCTestCase {
         }
         let fakeRangeExpressionTrue = FakeRangeExpression(containsResult: true)
         let validatedTrue = Validation<[String]>.range(fakeRangeExpressionTrue)
-        XCTAssert(validatedTrue.isValid(value: .init()))
+        XCTAssert(validatedTrue.isValid(value: .init()).isSuccess)
         let fakeRangeExpressionFalse = FakeRangeExpression(containsResult: false)
         let validatedFalse = Validation<[String]>.range(fakeRangeExpressionFalse)
-        XCTAssertFalse(validatedFalse.isValid(value: .init()))
+        XCTAssertFalse(validatedFalse.isValid(value: .init()).isSuccess)
     }
     
 }

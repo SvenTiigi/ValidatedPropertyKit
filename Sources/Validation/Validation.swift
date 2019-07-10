@@ -15,8 +15,8 @@ public struct Validation<Value> {
     
     // MARK: Properties
     
-    /// The Predicate Typealias representing `(Value) -> Bool`
-    public typealias Predicate = (Value) -> Bool
+    /// The Predicate Typealias representing `(Value) -> Result<Void, ValidationError>`
+    public typealias Predicate = (Value) -> Result<Void, ValidationError>
     
     /// The Predicate
     let predicate: Predicate
@@ -39,8 +39,8 @@ extension Validation: Validatable {
     /// Validate the Value
     ///
     /// - Parameter value: The Value that should be validated
-    /// - Returns: A Bool if the given Value is valid or not
-    public func isValid(value: Value) -> Bool {
+    /// - Returns: A Result if the validation succeeded or failed
+    public func isValid(value: Value) -> Result<Void, ValidationError> {
         return self.predicate(value)
     }
     

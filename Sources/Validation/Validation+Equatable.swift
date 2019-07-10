@@ -18,7 +18,11 @@ public extension Validation where Value: Equatable {
     /// - Returns: A Validation
     static func equals(_ equatableValue: Value) -> Validation {
         return .init { value in
-            return value == equatableValue
+            if value == equatableValue {
+                return .success
+            } else {
+                return .failure("\(value) is not equal to \(equatableValue)")
+            }
         }
     }
     

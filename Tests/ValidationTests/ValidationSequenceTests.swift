@@ -20,16 +20,16 @@ class ValidationSequenceTests: XCTestCase {
         let validStrings = ["1", "2", "3"]
         let invalidStrings = ["2", "3", "4"]
         let validation = Validation<[String]>.contains("1")
-        XCTAssert(validation.isValid(value: validStrings))
-        XCTAssertFalse(validation.isValid(value: invalidStrings))
+        XCTAssert(validation.isValid(value: validStrings).isSuccess)
+        XCTAssertFalse(validation.isValid(value: invalidStrings).isSuccess)
     }
     
     func testStartsWith() {
         let validStrings = ["1", "2", "3"]
         let invalidStrings = ["2", "3", "4"]
         let validation = Validation<[String]>.startsWith("1", "2")
-        XCTAssert(validation.isValid(value: validStrings))
-        XCTAssertFalse(validation.isValid(value: invalidStrings))
+        XCTAssert(validation.isValid(value: validStrings).isSuccess)
+        XCTAssertFalse(validation.isValid(value: invalidStrings).isSuccess)
     }
     
 }

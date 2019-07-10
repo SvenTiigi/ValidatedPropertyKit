@@ -4,9 +4,6 @@ import XCTest
 XCTMain([
     testCase(ValidatedTests.allTests),
     testCase(OptionalableTests.allTests),
-    testCase(ValidationTests.allTests),
-    testCase(ValidationLogicalOperatorsTests.allTests),
-    testCase(ValidationComparisonOperatorsTests.allTests),
     testCase(ValidationEquatableTests.allTests),
     testCase(ValidationStringTests.allTests),
     testCase(ValidationSequenceTests.allTests),

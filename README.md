@@ -47,17 +47,11 @@ struct User {
     @Validated(.range(8...))
     var password: String?
     
-    @Validated(.greaterOrEqual(13))
-    var age: Int?
+    @Validated(.greaterOrEqual(1))
+    var friends: Int?
     
-    @Validated(.isURL && .hasSuffix("jpg"))
+    @Validated(.isURL && .hasPrefix("https"))
     var avatarURL: String?
-    
-    @Validated(!.contains("Android", options: .caseInsensitive))
-    var favoriteOperatingSystem: String?
-    
-    @Validated(.init { $0.first == "+" })
-    var phoneNumber: String?
     
 }
 ```
@@ -102,7 +96,7 @@ To integrate using Apple's [Swift Package Manager](https://swift.org/package-man
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/SvenTiigi/ValidatedPropertyKit.git", from: "1.0.0")
+    .package(url: "https://github.com/SvenTiigi/ValidatedPropertyKit.git", from: "0.0.1")
 ]
 ```
 
@@ -137,13 +131,13 @@ print(username) // nil
 
 ### Validation 🚦
 
-Every `@Validated` attribute must be initialized with a `Validation` which simply takes a `(Value) -> Bool` closure.
+Every `@Validated` attribute must be initialized with a `Validation` which will be initialized with a closure.
 
 ```swift
 @Validated(.init { value in
-    value.first == "+"
+   value.isEmpty ? .failure("String is empty") : .success(())
 })
-var phoneNumber: String?
+var username: String?
 ```
 > ☝️ Check out the [Predefined Validations](https://github.com/SvenTiigi/ValidatedPropertyKit#predefined-validations) section to get an overview of the many predefined validations.
 
@@ -155,7 +149,7 @@ extension Validation where Value == Int {
     /// Will validate if the Integer is the meaning of life
     static var isMeaningOfLife: Validation {
         return .init { value in
-            return value == 42
+            value == 42 ? .success(()) : .failure("\(value) isn't the meaning of life")
         }
     }
 
@@ -169,11 +163,38 @@ And apply them to your validated property.
 var number: Int?
 ```
 
+### Error Handling 🕵️‍♂️
+
+Each property that is declared with the `@Validated` attribute can make use of advanced functions and properties from the `Validated` Property Wrapper itself via the `$` notation prefix.
+
+Beside doing a simple `nil` check on your `@Validated` property to ensure if the value is valid or not you can access the `validatedValue` or `validationError` property to retrieve the `ValidationError` or the valid value.
+
+```swift
+@Validated(.nonEmpty)
+var username: String?
+
+// Switch on `validatedValue`
+switch $username.validatedValue {
+case .success(let value):
+    // Value is valid ✅
+    break
+case .failure(let validationError):
+    // Value is invalid ⛔️
+    break
+}
+
+// Or unwrap the `validationError`
+if let validationError = $username.validationError {
+    // Value is invalid ⛔️
+} else {
+    // Value is valid ✅
+}
+
+```
+
 ### Restore ↩️
 
-Each property that is declared with the `@Validated` attribute can make use of the `restore()` function from the `Validated` Property Wrapper itself via the `$` notation prefix.
-
-When invoking `$property.restore()` the value will get restored to the last successful validated value.
+Additionally, you can `restore` your `@Validated` property to the last successful validated value.
 
 ```swift
 @Validated(.nonEmpty)
@@ -211,7 +232,7 @@ Validation Operators allowing you to combine multiple Validations like you would
 
 ```swift
 // Logical AND
-@Validated(.isURL && .hasSuffix("jpg"))
+@Validated(.isURL && .hasPrefix("https"))
 var avatarURL: String?
 
 // Logical OR
@@ -320,6 +341,12 @@ var comparable: Int?
 var comparable: Int?
 ```
 
+## Featured on
+
+* [iOS Goodies](https://ios-goodies.com/post/185888580686/week-288)
+* [iOS Dev Weekly](https://iosdevweekly.com/issues/410#start)
+* [Swift Weekly](http://digest.swiftweekly.com/issues/swift-weekly-issue-163-186066)
+* [AppCoda Weekly](http://digest.appcoda.com/issues/appcoda-weekly-issue-130-186576)
 
 ## Contributing
 Contributions are very welcome 🙌
