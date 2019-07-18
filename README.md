@@ -347,6 +347,7 @@ var comparable: Int?
 * [iOS Dev Weekly](https://iosdevweekly.com/issues/410#start)
 * [Swift Weekly](http://digest.swiftweekly.com/issues/swift-weekly-issue-163-186066)
 * [AppCoda Weekly](http://digest.appcoda.com/issues/appcoda-weekly-issue-130-186576)
+* [AwesomeiOS Weekly](http://weekly.awesomeios.com/issues/27)
 
 ## Contributing
 Contributions are very welcome 🙌
