@@ -28,11 +28,11 @@ jobs:
       script: swift test
     - stage: Tests
       os: osx
-      osx_image: xcode10.2
+      osx_image: xcode11
       name: Unit Tests
       script: fastlane ios tests
     - stage: Compatibility
       os: osx
-      osx_image: xcode10.2
+      osx_image: xcode11
       name: DependencyManager compatibility
       script: fastlane ios compatibilityTests
