@@ -65,8 +65,6 @@ struct User {
 
 ## Installation
 
-> ⚠️ ValidatedPropertyKit can currently only be used with Xcode 11 Beta and Swift 5.1.
-
 ### CocoaPods
 
 ValidatedPropertyKit is available through [CocoaPods](http://cocoapods.org). To install
@@ -96,7 +94,7 @@ To integrate using Apple's [Swift Package Manager](https://swift.org/package-man
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/SvenTiigi/ValidatedPropertyKit.git", from: "0.0.1")
+    .package(url: "https://github.com/SvenTiigi/ValidatedPropertyKit.git", from: "0.0.3")
 ]
 ```
 
