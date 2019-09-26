@@ -107,7 +107,6 @@ import Foundation
  @Validated(!.contains("Android", options: .caseInsensitive))
  var favoriteOperatingSystem: String?
  ```
- 
  */
 @propertyWrapper
 public struct Validated<Value: Optionalable> {
