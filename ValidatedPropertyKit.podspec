@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                      = "ValidatedPropertyKit"
-  s.version                   = "0.0.2"
+  s.version                   = "0.0.3"
   s.summary                   = "ValidatedPropertyKit"
   s.homepage                  = "https://SvenTiigi@github.com/SvenTiigi/ValidatedPropertyKit"
   s.license                   = { :type => "MIT", :file => "LICENSE" }
