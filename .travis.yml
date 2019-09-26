@@ -24,10 +24,7 @@ jobs:
     - stage: Tests
       os: osx
       osx_image: xcode11
-      name: Unit Tests
-      script: fastlane ios tests
-    - stage: Compatibility
-      os: osx
-      osx_image: xcode11
-      name: DependencyManager compatibility
-      script: fastlane ios compatibilityTests
+      name: Tests
+      script: 
+        - fastlane ios tests
+        - fastlane ios compatibilityTests
