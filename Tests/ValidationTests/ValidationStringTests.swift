@@ -83,10 +83,38 @@ class ValidationStringTests: XCTestCase {
     
     func testEmail() {
         let validation = Validation<String>.isEmail
-        let validEMail = "mr.robot@fsociety.com"
-        let invalidEMail = UUID().uuidString
-        XCTAssert(validation.isValid(value: validEMail).isSuccess)
-        XCTAssertFalse(validation.isValid(value: invalidEMail).isSuccess)
+
+        XCTAssert(validation.isValid(value: "email@domain.com").isSuccess)
+        XCTAssert(validation.isValid(value: "firstname.lastname@domain.com").isSuccess)
+        XCTAssert(validation.isValid(value: "email@subdomain.domain.com").isSuccess)
+        XCTAssert(validation.isValid(value: "firstname+lastname@domain.com").isSuccess)
+        XCTAssert(validation.isValid(value: "email@123.123.123.123").isSuccess)
+        XCTAssert(validation.isValid(value: "email@[123.123.123.123]").isSuccess)
+        XCTAssert(validation.isValid(value: "\"email\"@domain.com").isSuccess)
+        XCTAssert(validation.isValid(value: "1234567890@domain.com").isSuccess)
+        XCTAssert(validation.isValid(value: "email@domain-one.com").isSuccess)
+        XCTAssert(validation.isValid(value: "_______@domain.com").isSuccess)
+        XCTAssert(validation.isValid(value: "email@domain.name").isSuccess)
+        XCTAssert(validation.isValid(value: "email@domain.co.jp").isSuccess)
+        XCTAssert(validation.isValid(value: "firstname-lastname@domain.com").isSuccess)
+
+        XCTAssertFalse(validation.isValid(value: "").isSuccess)
+        XCTAssertFalse(validation.isValid(value: "plainaddress").isSuccess)
+        XCTAssertFalse(validation.isValid(value: "#@%^%#$@#$@#.com").isSuccess)
+        XCTAssertFalse(validation.isValid(value: "@domain.com").isSuccess)
+        XCTAssertFalse(validation.isValid(value: "Joe Smith <email@domain.com>").isSuccess)
+        XCTAssertFalse(validation.isValid(value: "email.domain.com").isSuccess)
+        XCTAssertFalse(validation.isValid(value: "email@domain@domain.com").isSuccess)
+        XCTAssertFalse(validation.isValid(value: ".email@domain.com").isSuccess)
+        XCTAssertFalse(validation.isValid(value: "email.@domain.com").isSuccess)
+        XCTAssertFalse(validation.isValid(value: "email..email@domain.com").isSuccess)
+        XCTAssertFalse(validation.isValid(value: "email@domain.com (Joe Smith)").isSuccess)
+        XCTAssertFalse(validation.isValid(value: "email@domain").isSuccess)
+        XCTAssertFalse(validation.isValid(value: "email@-domain.com").isSuccess)
+        XCTAssertFalse(validation.isValid(value: " email@domain.com").isSuccess)
+        XCTAssertFalse(validation.isValid(value: "email@domain.com ").isSuccess)
+        XCTAssertFalse(validation.isValid(value: "\nemail@domain.com").isSuccess)
+        XCTAssertFalse(validation.isValid(value: "nemail@domain.com   \n\n").isSuccess)
     }
     
     func testURL() {
