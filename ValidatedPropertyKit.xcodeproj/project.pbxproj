@@ -147,7 +147,6 @@
 		3D9C42F12274604A000A6585 /* ValidatedPropertyKit-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ValidatedPropertyKit-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9C43012274611B000A6585 /* ValidatedPropertyKit-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ValidatedPropertyKit-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9C431122746198000A6585 /* ValidatedPropertyKit-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ValidatedPropertyKit-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3DB91AC4229AC263002668DA /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		3DE5A8A322C282AB00D91A11 /* Validatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validatable.swift; sourceTree = "<group>"; };
 		3DE5A8A522C282AB00D91A11 /* Optionalable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Optionalable.swift; sourceTree = "<group>"; };
 		3DE5A8A622C282AB00D91A11 /* Optional+Optionalable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Optionalable.swift"; sourceTree = "<group>"; };
@@ -279,7 +278,6 @@
 				3D9C42DB22745DB0000A6585 /* .gitignore */,
 				3D9C42D822745DAF000A6585 /* .jazzy.yaml */,
 				3D9C42D922745DAF000A6585 /* .swiftlint.yml */,
-				3DB91AC4229AC263002668DA /* .travis.yml */,
 			);
 			path = Configs;
 			sourceTree = "<group>";
