@@ -128,6 +128,7 @@
 		3D282B6E22CFC32B00CB3BF8 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		3D282B7322CFCA3C00CB3BF8 /* Result+Success.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Success.swift"; sourceTree = "<group>"; };
 		3D282B7A22CFD6C900CB3BF8 /* Result+isSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+isSuccess.swift"; sourceTree = "<group>"; };
+		3D914536237DC7DB006EAF1A /* main.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = main.yml; path = .github/workflows/main.yml; sourceTree = SOURCE_ROOT; };
 		3D9C429022745894000A6585 /* ValidatedPropertyKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidatedPropertyKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9C429C227458E8000A6585 /* ValidatedPropertyKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ValidatedPropertyKit.plist; sourceTree = "<group>"; };
 		3D9C429D227458E8000A6585 /* ValidatedPropertyKitTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ValidatedPropertyKitTests.plist; sourceTree = "<group>"; };
@@ -147,7 +148,6 @@
 		3D9C42F12274604A000A6585 /* ValidatedPropertyKit-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ValidatedPropertyKit-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9C43012274611B000A6585 /* ValidatedPropertyKit-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ValidatedPropertyKit-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9C431122746198000A6585 /* ValidatedPropertyKit-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ValidatedPropertyKit-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3DB91AC4229AC263002668DA /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		3DE5A8A322C282AB00D91A11 /* Validatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validatable.swift; sourceTree = "<group>"; };
 		3DE5A8A522C282AB00D91A11 /* Optionalable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Optionalable.swift; sourceTree = "<group>"; };
 		3DE5A8A622C282AB00D91A11 /* Optional+Optionalable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Optionalable.swift"; sourceTree = "<group>"; };
@@ -274,12 +274,12 @@
 				3D9C42D422745B48000A6585 /* ValidatedPropertyKit.podspec */,
 				3D9C42D322745B48000A6585 /* Package.swift */,
 				3D9C42D622745C9D000A6585 /* Fastfile */,
+				3D914536237DC7DB006EAF1A /* main.yml */,
 				3D9C42D222745B48000A6585 /* LICENSE */,
 				3D9C42D522745B48000A6585 /* README.md */,
 				3D9C42DB22745DB0000A6585 /* .gitignore */,
 				3D9C42D822745DAF000A6585 /* .jazzy.yaml */,
 				3D9C42D922745DAF000A6585 /* .swiftlint.yml */,
-				3DB91AC4229AC263002668DA /* .travis.yml */,
 			);
 			path = Configs;
 			sourceTree = "<group>";

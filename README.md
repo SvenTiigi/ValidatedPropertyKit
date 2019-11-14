@@ -6,6 +6,9 @@
    <a href="https://developer.apple.com/swift/">
       <img src="https://img.shields.io/badge/Swift-5.1-orange.svg?style=flat" alt="Swift 5.1">
    </a>
+   <a href="https://github.com/SvenTiigi/ValidatedPropertyKit/actions?query=workflow%3ACI">
+      <img src="https://github.com/SvenTiigi/ValidatedPropertyKit/workflows/CI/badge.svg" alt="CI Status">
+   </a>
    <a href="http://cocoapods.org/pods/ValidatedPropertyKit">
       <img src="https://img.shields.io/cocoapods/v/ValidatedPropertyKit.svg?style=flat" alt="Version">
    </a>
@@ -163,7 +166,7 @@ var number: Int?
 
 ### Error Handling 🕵️‍♂️
 
-Each property that is declared with the `@Validated` attribute can make use of advanced functions and properties from the `Validated` Property Wrapper itself via the `$` notation prefix.
+Each property that is declared with the `@Validated` attribute can make use of advanced functions and properties from the `Validated` Property Wrapper itself via the `_` notation prefix.
 
 Beside doing a simple `nil` check on your `@Validated` property to ensure if the value is valid or not you can access the `validatedValue` or `validationError` property to retrieve the `ValidationError` or the valid value.
 
@@ -172,7 +175,7 @@ Beside doing a simple `nil` check on your `@Validated` property to ensure if the
 var username: String?
 
 // Switch on `validatedValue`
-switch $username.validatedValue {
+switch _username.validatedValue {
 case .success(let value):
     // Value is valid ✅
     break
@@ -182,7 +185,7 @@ case .failure(let validationError):
 }
 
 // Or unwrap the `validationError`
-if let validationError = $username.validationError {
+if let validationError = _username.validationError {
     // Value is invalid ⛔️
 } else {
     // Value is valid ✅
@@ -205,7 +208,7 @@ username = ""
 print(username) // nil
 
 // Restore to last successful validated value
-$username.restore()
+_username.restore()
 print(username) // "Mr.Robot"
 ```
 
@@ -218,10 +221,10 @@ As the aforementioned `restore()` function you can also access the `isValid` Boo
 var username: String?
 
 username = "Mr.Robot"
-print($username.isValid) // true
+print(_username.isValid) // true
 
 username = ""
-print($username.isValid) // false
+print(_username.isValid) // false
 ```
 
 ### Validation Operators 🔗

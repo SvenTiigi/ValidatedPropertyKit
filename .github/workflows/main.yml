@@ -1,0 +1,19 @@
+name: CI
+
+on: [push]
+
+jobs:
+  tests:
+    name: Unit-Tests
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: fastlane ios tests
+      run: fastlane ios tests
+  compatibility:
+    name: Compatibility-Tests
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: fastlane ios compatibilityTests
+      run: fastlane ios compatibilityTests
