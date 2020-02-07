@@ -156,20 +156,22 @@ public struct Validated<Value: Optionalable> {
     
     /// Designated Initializer
     ///
+    /// - Parameter wrappedValue: The wrapped Value
     /// - Parameter validation: The Validation
-    public init(_ validation: Validation<Value.Wrapped>) {
-        self.validation = validation
-        self.validatedValue = .failure(.nilError)
+    public init(
+        wrappedValue: Value,
+        _ validation: Validation<Value.Wrapped>
+    ) {
+        self.init(validation)
+        self.wrappedValue = wrappedValue
     }
     
     /// Designated Initializer
     ///
-    /// - Parameter wrappedValue: The wrapped Value
     /// - Parameter validation: The Validation
-    public init(wrappedValue: Value,
-                _ validation: Validation<Value.Wrapped>) {
-        self.init(validation)
-        self.wrappedValue = wrappedValue
+    public init(_ validation: Validation<Value.Wrapped>) {
+        self.validation = validation
+        self.validatedValue = .failure(.nilError)
     }
     
     // MARK: Projected Value
