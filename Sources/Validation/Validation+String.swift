@@ -18,8 +18,10 @@ public extension Validation where Value: StringProtocol {
     ///   - string: The String that should be contained
     ///   - options: The String ComparisonOptions. Default value `.init`
     /// - Returns: A Validation
-    static func contains<S: StringProtocol>(_ string: S,
-                                            options: NSString.CompareOptions = .init()) -> Validation {
+    static func contains<S: StringProtocol>(
+        _ string: S,
+        options: NSString.CompareOptions = .init()
+    ) -> Validation {
         return .init { value in
             if value.range(of: string, options: options) != nil {
                 return .success
@@ -70,9 +72,11 @@ public extension Validation where Value == String {
     ///   - options: The NSRegularExpression Options. Default value `.init`
     ///   - matchingOptions: The NSRegularExpression MatchingOptions. Default value `.init`
     /// - Returns: A Validation
-    static func regularExpression(_ pattern: String,
-                                  options: NSRegularExpression.Options = .init(),
-                                  matchingOptions: NSRegularExpression.MatchingOptions = .init()) -> Validation {
+    static func regularExpression(
+        _ pattern: String,
+        options: NSRegularExpression.Options = .init(),
+        matchingOptions: NSRegularExpression.MatchingOptions = .init()
+    ) -> Validation {
         // Verify NSRegularExpression can be constructed with String Pattern
         guard let regularExpression = try? NSRegularExpression(pattern: pattern, options: options) else {
             // Otherwise return Validation with failure
@@ -91,8 +95,10 @@ public extension Validation where Value == String {
     ///   - regularExpression: The NSRegularExpression
     ///   - matchingOptions: The NSRegularExpression.MatchingOptions. Default value `.init`
     /// - Returns: A Validation
-    static func regularExpression(_ regularExpression: NSRegularExpression,
-                                  matchingOptions: NSRegularExpression.MatchingOptions = .init()) -> Validation {
+    static func regularExpression(
+        _ regularExpression: NSRegularExpression,
+        matchingOptions: NSRegularExpression.MatchingOptions = .init()
+    ) -> Validation {
         return .init { value in
             // Initialize firstMatch is available Bool value
             let firstMatchIsAvailable = regularExpression.firstMatch(

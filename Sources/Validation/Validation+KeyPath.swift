@@ -18,8 +18,10 @@ public extension Validation {
     ///   - keyPath: A key path from a specific root type to a specific resulting value type
     ///   - validation: The Validation for the specific resulting value type
     /// - Returns: A Validation
-    static func keyPath<T>(_ keyPath: KeyPath<Value, T>,
-                           _ validation: Validation<T>) -> Validation {
+    static func keyPath<T>(
+        _ keyPath: KeyPath<Value, T>,
+        _ validation: Validation<T>
+    ) -> Validation {
         return .init { value in
             return validation.isValid(value: value[keyPath: keyPath])
         }
