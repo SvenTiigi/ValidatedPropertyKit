@@ -116,6 +116,9 @@ public struct Validated<Value: Optionalable> {
     /// The Validation
     let validation: Validation<Value.Wrapped>
     
+    /// The optional Error message
+    let errorMessage: String?
+    
     /// The validated value
     public private(set) var validatedValue: Result<Value.Wrapped, ValidationError> {
         didSet {
@@ -155,22 +158,32 @@ public struct Validated<Value: Optionalable> {
     // MARK: Initializer
     
     /// Designated Initializer
-    ///
-    /// - Parameter wrappedValue: The wrapped Value
-    /// - Parameter validation: The Validation
+    /// - Parameters:
+    ///   - wrappedValue: The wrapped Value
+    ///   - validation: The Validation
+    ///   - errorMessage: The custom Error message. Default value `nil`
     public init(
         wrappedValue: Value,
-        _ validation: Validation<Value.Wrapped>
+        _ validation: Validation<Value.Wrapped>,
+        errorMessage: String? = nil
     ) {
-        self.init(validation)
+        self.init(
+            validation,
+            errorMessage: errorMessage
+        )
         self.wrappedValue = wrappedValue
     }
     
     /// Designated Initializer
-    ///
-    /// - Parameter validation: The Validation
-    public init(_ validation: Validation<Value.Wrapped>) {
+    /// - Parameters:
+    ///   - validation: The Validation
+    ///   - errorMessage: The custom Error message. Default value `nil`
+    public init(
+        _ validation: Validation<Value.Wrapped>,
+        errorMessage: String? = nil
+    ) {
         self.validation = validation
+        self.errorMessage = errorMessage
         self.validatedValue = .failure(.nilError)
     }
     
@@ -219,7 +232,17 @@ extension Validated: Validatable {
             return .failure(.nilError)
         }
         // Return value validation result
-        return self.validation.isValid(value: wrappedValue).map { wrappedValue }
+        return self.validation.isValid(value: wrappedValue)
+            .map { wrappedValue }
+            .mapError { validationError in
+                // Verify a custom Error Message is available
+                guard let errorMessage = self.errorMessage else {
+                    // Otherwise return the current ValidationError
+                    return validationError
+                }
+                // Otherwise return custom Error message
+                return .init(message: errorMessage)
+            }
     }
     
 }
