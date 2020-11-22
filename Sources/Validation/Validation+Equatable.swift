@@ -13,9 +13,7 @@ import Foundation
 public extension Validation where Value: Equatable {
     
     /// Returns a Validation indicating whether two values are equal.
-    ///
     /// - Parameter equatableValue: The Equatable value
-    /// - Returns: A Validation
     static func equals(
         _ equatableValue: Value
     ) -> Self {

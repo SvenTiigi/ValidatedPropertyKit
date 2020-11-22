@@ -13,9 +13,7 @@ import Foundation
 public extension Validation where Value: Comparable {
     
     /// Validation with less `<` than comparable value
-    ///
     /// - Parameter comparableValue: The Comparable value
-    /// - Returns: The Validation
     static func less(
         _ comparableValue: Value
     ) -> Self {
@@ -25,9 +23,7 @@ public extension Validation where Value: Comparable {
     }
     
     /// Validation with less or equal `<=` than comparable value
-    ///
     /// - Parameter comparableValue: The Comparable value
-    /// - Returns: The Validation
     static func lessOrEqual(
         _ comparableValue: Value
     ) -> Self {
@@ -37,9 +33,7 @@ public extension Validation where Value: Comparable {
     }
     
     /// Validation with greater `>` than comparable value
-    ///
     /// - Parameter comparableValue: The Comparable value
-    /// - Returns: The Validation
     static func greater(
         _ comparableValue: Value
     ) -> Self {
@@ -49,9 +43,7 @@ public extension Validation where Value: Comparable {
     }
     
     /// Validation with greater or equal `>=` than comparable value
-    ///
     /// - Parameter comparableValue: The Comparable value
-    /// - Returns: The Validation
     static func greaterOrEqual(
         _ comparableValue: Value
     ) -> Self {

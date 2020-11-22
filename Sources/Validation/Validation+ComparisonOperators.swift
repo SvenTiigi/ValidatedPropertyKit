@@ -13,11 +13,9 @@ import Foundation
 public extension Validation {
     
     /// Returns a Validation where two given Validation results will be compared to equality
-    ///
     /// - Parameters:
     ///   - lhs: The left-hand side of the operation
     ///   - rhs: The right-hand side of the operation
-    /// - Returns: The new Validation
     static func == (
         lhs: Self,
         rhs: Self
@@ -34,11 +32,9 @@ public extension Validation {
 public extension Validation {
     
     /// Returns a Validation where two given Validation results will be compared to unequality
-    ///
     /// - Parameters:
     ///   - lhs: The left-hand side of the operation
     ///   - rhs: The right-hand side of the operation
-    /// - Returns: The new Validation
     static func != (
         lhs: Self,
         rhs: Self

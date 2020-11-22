@@ -13,9 +13,7 @@ import Foundation
 public extension Validation {
     
     /// Performs a logical `NOT` (`!`) operation on a Validation
-    ///
     /// - Parameter validation: The Validation value to negate
-    /// - Returns: The negated Validation
     static prefix func ! (
         validation: Self
     ) -> Self {
@@ -31,11 +29,9 @@ public extension Validation {
 public extension Validation {
     
     /// Performs a logical `AND` (`&&`) operation on two Validations
-    ///
     /// - Parameters:
     ///   - lhs: The left-hand side of the operation
     ///   - rhs: The right-hand side of the operation
-    /// - Returns: The new Validation
     static func && (
         lhs: Self,
         rhs: @autoclosure @escaping () -> Self
@@ -52,11 +48,9 @@ public extension Validation {
 public extension Validation {
     
     /// Performs a logical `OR` (`||`) operation on two Validations
-    ///
     /// - Parameters:
     ///   - lhs: The left-hand side of the operation
     ///   - rhs: The right-hand side of the operation
-    /// - Returns: The new Validation
     static func || (
         lhs: Self,
         rhs: @autoclosure @escaping () -> Self

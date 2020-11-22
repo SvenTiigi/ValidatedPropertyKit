@@ -20,9 +20,7 @@ public extension Validation where Value: Collection {
     }
     
     /// Validation with RangeExpression
-    ///
     /// - Parameter range: The RangeExpression
-    /// - Returns: The Range Validation
     static func range<R: RangeExpression>(
         _ range: R
     ) -> Self where R.Bound == Int {
