@@ -53,16 +53,17 @@ public struct OptionalValidated<Value: Optionalable> {
     /// - Parameters:
     ///   - wrappedValue: The Value. Default value `nil`
     ///   - validation: The Validation
-    ///   - isValidIfNil: Bool value if `isValid` if `Value` is nil. Default value `false`
+    ///   - nilValidation: The Validation if the Value  is nil. Default value `.always(false)`
     public init(
         wrappedValue: Value = nil,
         _ validation: Validation<Value.Wrapped>,
-        isValidIfNil: Bool = false
+        nilValidation: Validation<Void> = .always(false)
     ) {
         self.validatedValue = .init(
             wrappedValue: wrappedValue,
             .init { value in
-                value.wrapped.flatMap(validation.isValid) ?? isValidIfNil
+                value.wrapped.flatMap(validation.isValid)
+                    ?? nilValidation.isValid(value: ())
             }
         )
     }
@@ -73,15 +74,16 @@ public struct OptionalValidated<Value: Optionalable> {
     /// - Parameters:
     ///   - validation: The new Validation
     ///   - reValidateValue: Bool value if current Value should be revalidated with new Validation. Default value `true`
-    ///   - isValidIfNil: Bool value if `isValid` if `Value` is nil. Default value `false`
+    ///   - nilValidation: The Validation if the Value  is nil. Default value `.always(false)
     public mutating func update(
         validation: Validation<Value.Wrapped>,
         reValidateValue: Bool = true,
-        isValidIfNil: Bool = false
+        nilValidation: Validation<Void> = .always(false)
     ) {
         self.validatedValue.update(
             validation: .init { value in
-                value.wrapped.flatMap(validation.isValid) ?? isValidIfNil
+                value.wrapped.flatMap(validation.isValid)
+                    ?? nilValidation.isValid(value: ())
             },
             reValidateValue: reValidateValue
         )
