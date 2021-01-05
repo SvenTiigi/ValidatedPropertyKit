@@ -112,14 +112,12 @@ public extension Validated where Value: Optionalable {
         _ validation: Validation<Value.Wrapped>,
         nilValidation: Validation<Void> = .always(false)
     ) {
-        self._storage = .init(
-            wrappedValue: .init(
-                value: wrappedValue,
-                validation: .init { value in
-                    value.wrapped.flatMap(validation.isValid)
-                        ?? nilValidation.isValid(value: ())
-                }
-            )
+        self.init(
+            wrappedValue: wrappedValue,
+            .init { value in
+                value.wrapped.flatMap(validation.isValid)
+                    ?? nilValidation.isValid(value: ())
+            }
         )
     }
     
