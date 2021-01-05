@@ -11,6 +11,10 @@
 		3D30DFC3256A890000F68068 /* Validation+Always.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Always.swift */; };
 		3D30DFC4256A890000F68068 /* Validation+Always.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Always.swift */; };
 		3D30DFC5256A890000F68068 /* Validation+Always.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Always.swift */; };
+		3D4040F725A4745500F30306 /* Validation+BinaryInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4040F625A4745500F30306 /* Validation+BinaryInteger.swift */; };
+		3D4040F825A4745500F30306 /* Validation+BinaryInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4040F625A4745500F30306 /* Validation+BinaryInteger.swift */; };
+		3D4040F925A4745500F30306 /* Validation+BinaryInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4040F625A4745500F30306 /* Validation+BinaryInteger.swift */; };
+		3D4040FA25A4745500F30306 /* Validation+BinaryInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4040F625A4745500F30306 /* Validation+BinaryInteger.swift */; };
 		3D512B6125A451F000753C4E /* Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D512B6025A451F000753C4E /* Optionalable.swift */; };
 		3D512B6225A451F000753C4E /* Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D512B6025A451F000753C4E /* Optionalable.swift */; };
 		3D512B6325A451F000753C4E /* Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D512B6025A451F000753C4E /* Optionalable.swift */; };
@@ -132,6 +136,7 @@
 
 /* Begin PBXFileReference section */
 		3D30DFC1256A890000F68068 /* Validation+Always.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validation+Always.swift"; sourceTree = "<group>"; };
+		3D4040F625A4745500F30306 /* Validation+BinaryInteger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validation+BinaryInteger.swift"; sourceTree = "<group>"; };
 		3D512B6025A451F000753C4E /* Optionalable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optionalable.swift; sourceTree = "<group>"; };
 		3D512B6C25A4520600753C4E /* Optional+Optionalable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Optionalable.swift"; sourceTree = "<group>"; };
 		3D59C03925A3D10400B94734 /* Validatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validatable.swift; sourceTree = "<group>"; };
@@ -356,6 +361,7 @@
 				3DDD97B12569C752006FE065 /* Validation+LogicalOperators.swift */,
 				3DDD97BD2569C96C006FE065 /* Validation+ComparisonOperators.swift */,
 				3DDD97A52569C661006FE065 /* Validation+String.swift */,
+				3D4040F625A4745500F30306 /* Validation+BinaryInteger.swift */,
 				3DDD97D02569CA08006FE065 /* Validation+Equatable.swift */,
 				3DDD97DC2569CA26006FE065 /* Validation+Sequence.swift */,
 				3DDD97E82569CA4E006FE065 /* Validation+Collection.swift */,
@@ -753,6 +759,7 @@
 			files = (
 				3DDD97E92569CA4E006FE065 /* Validation+Collection.swift in Sources */,
 				3DDD97DD2569CA26006FE065 /* Validation+Sequence.swift in Sources */,
+				3D4040F725A4745500F30306 /* Validation+BinaryInteger.swift in Sources */,
 				3DDD97B22569C752006FE065 /* Validation+LogicalOperators.swift in Sources */,
 				3D59C04E25A3D13D00B94734 /* View+validated.swift in Sources */,
 				3DDD97BE2569C96C006FE065 /* Validation+ComparisonOperators.swift in Sources */,
@@ -776,6 +783,7 @@
 			files = (
 				3DDD97EA2569CA4E006FE065 /* Validation+Collection.swift in Sources */,
 				3DDD97DE2569CA26006FE065 /* Validation+Sequence.swift in Sources */,
+				3D4040F825A4745500F30306 /* Validation+BinaryInteger.swift in Sources */,
 				3DDD97B32569C752006FE065 /* Validation+LogicalOperators.swift in Sources */,
 				3D59C04F25A3D13D00B94734 /* View+validated.swift in Sources */,
 				3DDD97BF2569C96C006FE065 /* Validation+ComparisonOperators.swift in Sources */,
@@ -799,6 +807,7 @@
 			files = (
 				3DDD97EB2569CA4E006FE065 /* Validation+Collection.swift in Sources */,
 				3DDD97DF2569CA26006FE065 /* Validation+Sequence.swift in Sources */,
+				3D4040F925A4745500F30306 /* Validation+BinaryInteger.swift in Sources */,
 				3DDD97B42569C752006FE065 /* Validation+LogicalOperators.swift in Sources */,
 				3D59C05025A3D13D00B94734 /* View+validated.swift in Sources */,
 				3DDD97C02569C96C006FE065 /* Validation+ComparisonOperators.swift in Sources */,
@@ -822,6 +831,7 @@
 			files = (
 				3DDD97EC2569CA4E006FE065 /* Validation+Collection.swift in Sources */,
 				3DDD97E02569CA26006FE065 /* Validation+Sequence.swift in Sources */,
+				3D4040FA25A4745500F30306 /* Validation+BinaryInteger.swift in Sources */,
 				3DDD97B52569C752006FE065 /* Validation+LogicalOperators.swift in Sources */,
 				3D59C05125A3D13D00B94734 /* View+validated.swift in Sources */,
 				3DDD97C12569C96C006FE065 /* Validation+ComparisonOperators.swift in Sources */,
