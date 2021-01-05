@@ -14,7 +14,7 @@ struct LoginView: View {
     @Validated(!.isEmpty && .contains("@"))
     var mailAddress = String()
     
-    @Validated(!.isEmpty)
+    @Validated(.range(8...))
     var password = String()
     
     var body: some View {
@@ -23,13 +23,16 @@ struct LoginView: View {
             TextField("Password", text: self.$password)
             Button(
                 action: {
-                    print("Login \(self.mailAddress):\(self.password)")
+                    print("Login", self.mailAddress, self.password)
                 },
                 label: {
                     Text("Submit")
                 }
             )
-            .validated(self._mailAddress, self._password)
+            .validated(
+                self._mailAddress,
+                self._password
+            )
         }
         .listStyle(InsetGroupedListStyle())
     }
