@@ -7,30 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D30DF8F256A81BA00F68068 /* OptionalValidated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DF8E256A81BA00F68068 /* OptionalValidated.swift */; };
-		3D30DF90256A81BA00F68068 /* OptionalValidated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DF8E256A81BA00F68068 /* OptionalValidated.swift */; };
-		3D30DF91256A81BA00F68068 /* OptionalValidated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DF8E256A81BA00F68068 /* OptionalValidated.swift */; };
-		3D30DF92256A81BA00F68068 /* OptionalValidated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DF8E256A81BA00F68068 /* OptionalValidated.swift */; };
-		3D30DF9C256A81CF00F68068 /* Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DF9B256A81CF00F68068 /* Optionalable.swift */; };
-		3D30DF9D256A81CF00F68068 /* Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DF9B256A81CF00F68068 /* Optionalable.swift */; };
-		3D30DF9E256A81CF00F68068 /* Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DF9B256A81CF00F68068 /* Optionalable.swift */; };
-		3D30DF9F256A81CF00F68068 /* Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DF9B256A81CF00F68068 /* Optionalable.swift */; };
-		3D30DFAF256A81DA00F68068 /* Optional+Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFAE256A81DA00F68068 /* Optional+Optionalable.swift */; };
-		3D30DFB0256A81DA00F68068 /* Optional+Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFAE256A81DA00F68068 /* Optional+Optionalable.swift */; };
-		3D30DFB1256A81DA00F68068 /* Optional+Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFAE256A81DA00F68068 /* Optional+Optionalable.swift */; };
-		3D30DFB2256A81DA00F68068 /* Optional+Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFAE256A81DA00F68068 /* Optional+Optionalable.swift */; };
 		3D30DFC2256A890000F68068 /* Validation+Always.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Always.swift */; };
 		3D30DFC3256A890000F68068 /* Validation+Always.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Always.swift */; };
 		3D30DFC4256A890000F68068 /* Validation+Always.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Always.swift */; };
 		3D30DFC5256A890000F68068 /* Validation+Always.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Always.swift */; };
+		3D512B6125A451F000753C4E /* Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D512B6025A451F000753C4E /* Optionalable.swift */; };
+		3D512B6225A451F000753C4E /* Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D512B6025A451F000753C4E /* Optionalable.swift */; };
+		3D512B6325A451F000753C4E /* Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D512B6025A451F000753C4E /* Optionalable.swift */; };
+		3D512B6425A451F000753C4E /* Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D512B6025A451F000753C4E /* Optionalable.swift */; };
+		3D512B6D25A4520600753C4E /* Optional+Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D512B6C25A4520600753C4E /* Optional+Optionalable.swift */; };
+		3D512B6E25A4520600753C4E /* Optional+Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D512B6C25A4520600753C4E /* Optional+Optionalable.swift */; };
+		3D512B6F25A4520600753C4E /* Optional+Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D512B6C25A4520600753C4E /* Optional+Optionalable.swift */; };
+		3D512B7025A4520600753C4E /* Optional+Optionalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D512B6C25A4520600753C4E /* Optional+Optionalable.swift */; };
+		3D59C03A25A3D10400B94734 /* Validatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D59C03925A3D10400B94734 /* Validatable.swift */; };
+		3D59C03B25A3D10400B94734 /* Validatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D59C03925A3D10400B94734 /* Validatable.swift */; };
+		3D59C03C25A3D10400B94734 /* Validatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D59C03925A3D10400B94734 /* Validatable.swift */; };
+		3D59C03D25A3D10400B94734 /* Validatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D59C03925A3D10400B94734 /* Validatable.swift */; };
+		3D59C04E25A3D13D00B94734 /* View+validated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D59C04D25A3D13D00B94734 /* View+validated.swift */; };
+		3D59C04F25A3D13D00B94734 /* View+validated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D59C04D25A3D13D00B94734 /* View+validated.swift */; };
+		3D59C05025A3D13D00B94734 /* View+validated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D59C04D25A3D13D00B94734 /* View+validated.swift */; };
+		3D59C05125A3D13D00B94734 /* View+validated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D59C04D25A3D13D00B94734 /* View+validated.swift */; };
+		3D59C06225A3D72100B94734 /* Validatable+LogicalOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D59C06125A3D72100B94734 /* Validatable+LogicalOperators.swift */; };
+		3D59C06325A3D72100B94734 /* Validatable+LogicalOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D59C06125A3D72100B94734 /* Validatable+LogicalOperators.swift */; };
+		3D59C06425A3D72100B94734 /* Validatable+LogicalOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D59C06125A3D72100B94734 /* Validatable+LogicalOperators.swift */; };
+		3D59C06525A3D72100B94734 /* Validatable+LogicalOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D59C06125A3D72100B94734 /* Validatable+LogicalOperators.swift */; };
+		3D59C06E25A3D88000B94734 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D59C06D25A3D88000B94734 /* LoginView.swift */; };
 		3D9C42F62274604A000A6585 /* ValidatedPropertyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9C429022745894000A6585 /* ValidatedPropertyKit.framework */; };
 		3D9C42FC22746078000A6585 /* ValidatedPropertyKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C42D722745CDE000A6585 /* ValidatedPropertyKitTests.swift */; };
 		3D9C43062274611B000A6585 /* ValidatedPropertyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9C42A92274599D000A6585 /* ValidatedPropertyKit.framework */; };
 		3D9C430C22746131000A6585 /* ValidatedPropertyKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C42D722745CDE000A6585 /* ValidatedPropertyKitTests.swift */; };
 		3D9C431622746198000A6585 /* ValidatedPropertyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9C42C522745A07000A6585 /* ValidatedPropertyKit.framework */; };
 		3D9C431C227461AF000A6585 /* ValidatedPropertyKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C42D722745CDE000A6585 /* ValidatedPropertyKitTests.swift */; };
-		3D9C43242274629B000A6585 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C43232274629B000A6585 /* AppDelegate.swift */; };
-		3D9C43262274629B000A6585 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C43252274629B000A6585 /* ViewController.swift */; };
+		3D9C43242274629B000A6585 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C43232274629B000A6585 /* App.swift */; };
 		3D9C432B2274629C000A6585 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D9C432A2274629C000A6585 /* Assets.xcassets */; };
 		3D9C432E2274629C000A6585 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D9C432C2274629C000A6585 /* LaunchScreen.storyboard */; };
 		3D9C433422746323000A6585 /* ValidatedPropertyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9C429022745894000A6585 /* ValidatedPropertyKit.framework */; };
@@ -123,10 +131,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3D30DF8E256A81BA00F68068 /* OptionalValidated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalValidated.swift; sourceTree = "<group>"; };
-		3D30DF9B256A81CF00F68068 /* Optionalable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optionalable.swift; sourceTree = "<group>"; };
-		3D30DFAE256A81DA00F68068 /* Optional+Optionalable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Optionalable.swift"; sourceTree = "<group>"; };
 		3D30DFC1256A890000F68068 /* Validation+Always.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validation+Always.swift"; sourceTree = "<group>"; };
+		3D512B6025A451F000753C4E /* Optionalable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optionalable.swift; sourceTree = "<group>"; };
+		3D512B6C25A4520600753C4E /* Optional+Optionalable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Optionalable.swift"; sourceTree = "<group>"; };
+		3D59C03925A3D10400B94734 /* Validatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validatable.swift; sourceTree = "<group>"; };
+		3D59C04D25A3D13D00B94734 /* View+validated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+validated.swift"; sourceTree = "<group>"; };
+		3D59C06125A3D72100B94734 /* Validatable+LogicalOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validatable+LogicalOperators.swift"; sourceTree = "<group>"; };
+		3D59C06D25A3D88000B94734 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3D9C429022745894000A6585 /* ValidatedPropertyKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ValidatedPropertyKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9C429C227458E8000A6585 /* ValidatedPropertyKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ValidatedPropertyKit.plist; sourceTree = "<group>"; };
 		3D9C429D227458E8000A6585 /* ValidatedPropertyKitTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ValidatedPropertyKitTests.plist; sourceTree = "<group>"; };
@@ -147,8 +158,7 @@
 		3D9C43012274611B000A6585 /* ValidatedPropertyKit-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ValidatedPropertyKit-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9C431122746198000A6585 /* ValidatedPropertyKit-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ValidatedPropertyKit-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9C43212274629B000A6585 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D9C43232274629B000A6585 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3D9C43252274629B000A6585 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3D9C43232274629B000A6585 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		3D9C432A2274629C000A6585 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D9C432D2274629C000A6585 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D9C432F2274629C000A6585 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -228,14 +238,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3D30DF9A256A81C500F68068 /* OptionalValidated */ = {
+		3D512B5F25A451E700753C4E /* Optionalable */ = {
 			isa = PBXGroup;
 			children = (
-				3D30DF8E256A81BA00F68068 /* OptionalValidated.swift */,
-				3D30DF9B256A81CF00F68068 /* Optionalable.swift */,
-				3D30DFAE256A81DA00F68068 /* Optional+Optionalable.swift */,
+				3D512B6025A451F000753C4E /* Optionalable.swift */,
+				3D512B6C25A4520600753C4E /* Optional+Optionalable.swift */,
 			);
-			path = OptionalValidated;
+			path = Optionalable;
+			sourceTree = "<group>";
+		};
+		3D59C04C25A3D13000B94734 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3D59C04D25A3D13D00B94734 /* View+validated.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3D59C06025A3D70900B94734 /* Validatable */ = {
+			isa = PBXGroup;
+			children = (
+				3D59C03925A3D10400B94734 /* Validatable.swift */,
+				3D59C06125A3D72100B94734 /* Validatable+LogicalOperators.swift */,
+			);
+			path = Validatable;
 			sourceTree = "<group>";
 		};
 		3D9C428622745894000A6585 = {
@@ -285,8 +311,10 @@
 			isa = PBXGroup;
 			children = (
 				3DDD97622569C1D3006FE065 /* Validated.swift */,
-				3D30DF9A256A81C500F68068 /* OptionalValidated */,
+				3D59C06025A3D70900B94734 /* Validatable */,
 				3DDD979D2569C64E006FE065 /* Validation */,
+				3D512B5F25A451E700753C4E /* Optionalable */,
+				3D59C04C25A3D13000B94734 /* Extensions */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -303,8 +331,8 @@
 		3D9C43222274629B000A6585 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				3D9C43232274629B000A6585 /* AppDelegate.swift */,
-				3D9C43252274629B000A6585 /* ViewController.swift */,
+				3D9C43232274629B000A6585 /* App.swift */,
+				3D59C06D25A3D88000B94734 /* LoginView.swift */,
 				3D9C4333227462B9000A6585 /* Resources */,
 			);
 			path = Example;
@@ -726,17 +754,19 @@
 				3DDD97E92569CA4E006FE065 /* Validation+Collection.swift in Sources */,
 				3DDD97DD2569CA26006FE065 /* Validation+Sequence.swift in Sources */,
 				3DDD97B22569C752006FE065 /* Validation+LogicalOperators.swift in Sources */,
-				3D30DF8F256A81BA00F68068 /* OptionalValidated.swift in Sources */,
-				3D30DFAF256A81DA00F68068 /* Optional+Optionalable.swift in Sources */,
+				3D59C04E25A3D13D00B94734 /* View+validated.swift in Sources */,
 				3DDD97BE2569C96C006FE065 /* Validation+ComparisonOperators.swift in Sources */,
 				3DDD97632569C1D3006FE065 /* Validated.swift in Sources */,
+				3D512B6125A451F000753C4E /* Optionalable.swift in Sources */,
 				3DDD976F2569C26E006FE065 /* Validation.swift in Sources */,
+				3D59C06225A3D72100B94734 /* Validatable+LogicalOperators.swift in Sources */,
+				3D512B6D25A4520600753C4E /* Optional+Optionalable.swift in Sources */,
 				3D30DFC2256A890000F68068 /* Validation+Always.swift in Sources */,
 				3DDD97A62569C661006FE065 /* Validation+String.swift in Sources */,
+				3D59C03A25A3D10400B94734 /* Validatable.swift in Sources */,
 				3DDD97F52569CA75006FE065 /* Validation+Comparable.swift in Sources */,
 				3DDD97D12569CA08006FE065 /* Validation+Equatable.swift in Sources */,
 				3DDD98012569CAAA006FE065 /* Validation+KeyPath.swift in Sources */,
-				3D30DF9C256A81CF00F68068 /* Optionalable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,17 +777,19 @@
 				3DDD97EA2569CA4E006FE065 /* Validation+Collection.swift in Sources */,
 				3DDD97DE2569CA26006FE065 /* Validation+Sequence.swift in Sources */,
 				3DDD97B32569C752006FE065 /* Validation+LogicalOperators.swift in Sources */,
-				3D30DF90256A81BA00F68068 /* OptionalValidated.swift in Sources */,
-				3D30DFB0256A81DA00F68068 /* Optional+Optionalable.swift in Sources */,
+				3D59C04F25A3D13D00B94734 /* View+validated.swift in Sources */,
 				3DDD97BF2569C96C006FE065 /* Validation+ComparisonOperators.swift in Sources */,
 				3DDD97642569C1D3006FE065 /* Validated.swift in Sources */,
+				3D512B6225A451F000753C4E /* Optionalable.swift in Sources */,
 				3DDD97702569C26E006FE065 /* Validation.swift in Sources */,
+				3D59C06325A3D72100B94734 /* Validatable+LogicalOperators.swift in Sources */,
+				3D512B6E25A4520600753C4E /* Optional+Optionalable.swift in Sources */,
 				3D30DFC3256A890000F68068 /* Validation+Always.swift in Sources */,
 				3DDD97A72569C661006FE065 /* Validation+String.swift in Sources */,
+				3D59C03B25A3D10400B94734 /* Validatable.swift in Sources */,
 				3DDD97F62569CA75006FE065 /* Validation+Comparable.swift in Sources */,
 				3DDD97D22569CA08006FE065 /* Validation+Equatable.swift in Sources */,
 				3DDD98022569CAAA006FE065 /* Validation+KeyPath.swift in Sources */,
-				3D30DF9D256A81CF00F68068 /* Optionalable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -768,17 +800,19 @@
 				3DDD97EB2569CA4E006FE065 /* Validation+Collection.swift in Sources */,
 				3DDD97DF2569CA26006FE065 /* Validation+Sequence.swift in Sources */,
 				3DDD97B42569C752006FE065 /* Validation+LogicalOperators.swift in Sources */,
-				3D30DF91256A81BA00F68068 /* OptionalValidated.swift in Sources */,
-				3D30DFB1256A81DA00F68068 /* Optional+Optionalable.swift in Sources */,
+				3D59C05025A3D13D00B94734 /* View+validated.swift in Sources */,
 				3DDD97C02569C96C006FE065 /* Validation+ComparisonOperators.swift in Sources */,
 				3DDD97652569C1D3006FE065 /* Validated.swift in Sources */,
+				3D512B6325A451F000753C4E /* Optionalable.swift in Sources */,
 				3DDD97712569C26E006FE065 /* Validation.swift in Sources */,
+				3D59C06425A3D72100B94734 /* Validatable+LogicalOperators.swift in Sources */,
+				3D512B6F25A4520600753C4E /* Optional+Optionalable.swift in Sources */,
 				3D30DFC4256A890000F68068 /* Validation+Always.swift in Sources */,
 				3DDD97A82569C661006FE065 /* Validation+String.swift in Sources */,
+				3D59C03C25A3D10400B94734 /* Validatable.swift in Sources */,
 				3DDD97F72569CA75006FE065 /* Validation+Comparable.swift in Sources */,
 				3DDD97D32569CA08006FE065 /* Validation+Equatable.swift in Sources */,
 				3DDD98032569CAAA006FE065 /* Validation+KeyPath.swift in Sources */,
-				3D30DF9E256A81CF00F68068 /* Optionalable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -789,17 +823,19 @@
 				3DDD97EC2569CA4E006FE065 /* Validation+Collection.swift in Sources */,
 				3DDD97E02569CA26006FE065 /* Validation+Sequence.swift in Sources */,
 				3DDD97B52569C752006FE065 /* Validation+LogicalOperators.swift in Sources */,
-				3D30DF92256A81BA00F68068 /* OptionalValidated.swift in Sources */,
-				3D30DFB2256A81DA00F68068 /* Optional+Optionalable.swift in Sources */,
+				3D59C05125A3D13D00B94734 /* View+validated.swift in Sources */,
 				3DDD97C12569C96C006FE065 /* Validation+ComparisonOperators.swift in Sources */,
 				3DDD97662569C1D3006FE065 /* Validated.swift in Sources */,
+				3D512B6425A451F000753C4E /* Optionalable.swift in Sources */,
 				3DDD97722569C26E006FE065 /* Validation.swift in Sources */,
+				3D59C06525A3D72100B94734 /* Validatable+LogicalOperators.swift in Sources */,
+				3D512B7025A4520600753C4E /* Optional+Optionalable.swift in Sources */,
 				3D30DFC5256A890000F68068 /* Validation+Always.swift in Sources */,
 				3DDD97A92569C661006FE065 /* Validation+String.swift in Sources */,
+				3D59C03D25A3D10400B94734 /* Validatable.swift in Sources */,
 				3DDD97F82569CA75006FE065 /* Validation+Comparable.swift in Sources */,
 				3DDD97D42569CA08006FE065 /* Validation+Equatable.swift in Sources */,
 				3DDD98042569CAAA006FE065 /* Validation+KeyPath.swift in Sources */,
-				3D30DF9F256A81CF00F68068 /* Optionalable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -831,8 +867,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D9C43262274629B000A6585 /* ViewController.swift in Sources */,
-				3D9C43242274629B000A6585 /* AppDelegate.swift in Sources */,
+				3D59C06E25A3D88000B94734 /* LoginView.swift in Sources */,
+				3D9C43242274629B000A6585 /* App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1015,7 +1051,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Configs/ValidatedPropertyKit.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1046,7 +1082,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Configs/ValidatedPropertyKit.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1382,7 +1418,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Example/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1404,7 +1440,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Example/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

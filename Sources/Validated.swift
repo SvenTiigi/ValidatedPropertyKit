@@ -6,62 +6,54 @@
 //  Copyright © 2020 Sven Tiigi. All rights reserved.
 //
 
-import Combine
 import Foundation
+import SwiftUI
 
 // MARK: - Validated
 
 /// A Validated PropertyWrapper
 @propertyWrapper
-public struct Validated<Value> {
+public struct Validated<Value>: DynamicProperty, Validatable {
     
     // MARK: Properties
     
-    /// The Value
-    private var value: Value
+    /// The Storage
+    @StateObject
+    private var storage: Storage
     
     /// The Validation
-    private var validation: Validation<Value>
-    
-    /// Bool value if validated value is valid
-    public private(set) var isValid: Bool {
-        didSet {
-            // Verify validation state has changed
-            guard self.isValid != oldValue else {
-                // Otherwise return out of function
-                return
-            }
-            // Send updated validation state
-            self.validationSubject.send(self.isValid)
-        }
+    public var validation: Validation<Value> {
+        self.storage.validation
     }
     
-    /// The Validation Subject
-    private let validationSubject = PassthroughSubject<Bool, Never>()
-    
-    /// The Validation Changed Publisher
-    public var validationChanged: AnyPublisher<Bool, Never> {
-        self.validationSubject.eraseToAnyPublisher()
+    /// Bool value if validated value is valid
+    public var isValid: Bool {
+        self.storage.isValid
     }
     
     // MARK: PropertyWrapper-Properties
     
-    /// The projected `isValid` Bool value
-    public var projectedValue: Bool {
-        self.isValid
+    /// The projected `Binding<Value>`
+    public var projectedValue: Binding<Value> {
+        .init(
+            get: {
+                self.wrappedValue
+            },
+            set: { newValue in
+                self.wrappedValue = newValue
+            }
+        )
     }
     
     /// The wrapped Value
     public var wrappedValue: Value {
         get {
-            // Return stored value
-            self.value
+            // Return value
+            self.storage.value
         }
-        set {
+        nonmutating set {
             // Update value
-            self.value = newValue
-            // Validate new value
-            self.isValid = self.validation.isValid(value: self.value)
+            self.storage.value = newValue
         }
     }
     
@@ -69,33 +61,112 @@ public struct Validated<Value> {
     
     /// Designated Initializer
     /// - Parameters:
-    ///   - wrappedValue: The wrapped value
-    ///   - validation: The Validation
+    ///   - wrappedValue: The wrapped `Value`
+    ///   - validation: The `Validation`
     public init(
         wrappedValue: Value,
         _ validation: Validation<Value>
     ) {
-        self.value = wrappedValue
-        self.validation = validation
-        self.isValid = self.validation.isValid(value: self.value)
-        self.validationSubject.send(self.isValid)
+        self._storage = .init(
+            wrappedValue: .init(
+                value: wrappedValue,
+                validation: validation
+            )
+        )
     }
     
     // MARK: Update Validation
     
     /// Update the Validation
     /// - Parameters:
-    ///   - validation: The new Validation
     ///   - reValidateValue: Bool value if current Value should be revalidated with new Validation. Default value `true`
+    ///   - validation: The new Validation
     public mutating func update(
-        validation: Validation<Value>,
-        reValidateValue: Bool = true
+        reValidateValue: Bool = true,
+        validation: (Validation<Value>) -> Validation<Value>
     ) {
-        self.validation = validation
+        // Update Validation
+        self.storage.validation = validation(self.validation)
+        // Verify if value should be re-validated
         guard reValidateValue else {
+            // Otherwise return out of function
             return
         }
-        self.wrappedValue = self.value
+        // Re-Apply value
+        self.wrappedValue = self.storage.value
+    }
+    
+}
+
+// MARK: - Validated+Optionalable
+
+public extension Validated where Value: Optionalable {
+    
+    /// Designated Initializer for an optional Value type
+    /// - Parameters:
+    ///   - wrappedValue: The wrapped `Value`. Default value `nil`
+    ///   - validation: The `Validation` for the `Wrapped` value type
+    ///   - nilValidation: The `Validation` if the Value  is nil. Default value `.always(false)`
+    init(
+        wrappedValue: Value = nil,
+        _ validation: Validation<Value.Wrapped>,
+        nilValidation: Validation<Void> = .always(false)
+    ) {
+        self._storage = .init(
+            wrappedValue: .init(
+                value: wrappedValue,
+                validation: .init { value in
+                    value.wrapped.flatMap(validation.isValid)
+                        ?? nilValidation.isValid(value: ())
+                }
+            )
+        )
+    }
+    
+}
+
+// MARK: - Storage
+
+private extension Validated {
+    
+    /// The Storage
+    final class Storage: ObservableObject {
+        
+        // MARK: Properties
+        
+        /// The Value
+        var value: Value {
+            willSet {
+                // Emit on ObjectWillChange Subject
+                self.objectWillChange.send()
+            }
+            didSet {
+                // Validate value
+                self.isValid = self.validation.isValid(value: self.value)
+            }
+        }
+        
+        /// The Validation
+        var validation: Validation<Value>
+        
+        /// Bool value if validated value is valid
+        var isValid: Bool
+        
+        // MARK: Initializer
+        
+        /// Designated Initializer
+        /// - Parameters:
+        ///   - value: The Value
+        ///   - validation: The Validation
+        init(
+            value: Value,
+            validation: Validation<Value>
+        ) {
+            self.value = value
+            self.validation = validation
+            self.isValid = self.validation.isValid(value: self.value)
+        }
+        
     }
     
 }

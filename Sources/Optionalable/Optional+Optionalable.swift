@@ -2,8 +2,8 @@
 //  Optional+Optionalable.swift
 //  ValidatedPropertyKit
 //
-//  Created by Sven Tiigi on 22.11.20.
-//  Copyright © 2020 Sven Tiigi. All rights reserved.
+//  Created by Sven Tiigi on 05.01.21.
+//  Copyright © 2021 Sven Tiigi. All rights reserved.
 //
 
 import Foundation
