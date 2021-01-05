@@ -39,22 +39,32 @@
 <br/>
 
 ```swift
-final class ViewModel {
+struct LoginView: View {
     
-    @Validated(!.isEmpty)
-    var username = String()
-    
-    @Validated(.isEmail)
-    var email = String()
+    @Validated(!.isEmpty && .contains("@"))
+    var mailAddress = String()
     
     @Validated(.range(8...))
     var password = String()
     
-    @Validated(.greaterOrEqual(1))
-    var friends = Int()
-    
-    @OptionalValidated(.isURL && .hasPrefix("https"))
-    var avatarURL: String?
+    var body: some View {
+        List {
+            TextField("E-Mail", text: self.$mailAddress)
+            TextField("Password", text: self.$password)
+            Button(
+                action: {
+                    print("Login", self.mailAddress, self.password)
+                },
+                label: {
+                    Text("Submit")
+                }
+            )
+            .validated(
+                self._mailAddress,
+                self._password
+            )
+        }
+    }
     
 }
 ```
@@ -113,27 +123,41 @@ If you prefer not to use any of the aforementioned dependency managers, you can 
 
 The `@Validated` attribute allows you to specify a validation along to the declaration of your property.
 
-Use the `@OptionalValidated` property wrapper if you want to validate `Optional` properties.
-
 ```swift
 @Validated(!.isEmpty)
 var username = String()
 
-@OptionalValidated(.isURL && .hasPrefix("https"))
+@Validated(.isURL && .hasPrefix("https"))
 var avatarURL: String?
 ```
 
-Additionally, the `@OptionalValidated` property wrapper allows you to specify if the validation should fail or succeed when the value is `nil`.
+If `@Validated` is applied on an optional type e.g. `String?` you can specify whether the validation should fail or succeed when the value is `nil`.
 
 ```swift
-@OptionalValidated(
+@Validated(
    .isURL && .hasPrefix("https"), 
-   isValidIfNil: false
+   nilValidation: .always(false)
 )
 var avatarURL: String?
 ```
 
-> By default the argument `isValidIfNil` is set to `false`
+> By default the argument `nilValidation` is set to `.always(false)`
+
+In addition the `SwiftUI.View` extension `validated()` allows you to disable or enable a certain `SwiftUI.View` by specifying which `Validated` instances should evalute to `true`.
+
+```swift
+@Validated(!.isEmpty && .contains("@"))
+var mailAddress = String()
+    
+@Validated(.range(8...))
+var password = String()
+
+Button(
+   action: {},
+   label: { Text("Submit") }
+)
+.validated(self._mailAddress, self._password)
+```
 
 ### Validation 🚦
 
@@ -146,27 +170,11 @@ The projected value of the `Validated` property wrapper can be accessed via the 
 var username = String()
 
 username = "Mr.Robot"
-print($username) // true
+print(_username.isValid) // true
 
 username = ""
-print($username) // false
+print(_username.isValid) // false
 ```
-
-Or you can make use of the `validationChanged` Publisher which will emit whenever the validation result changes.
-
-Therefore you need to access the property wrapper directly via the (`_`) notation.
-
-```swift
-@Validated(!.isEmpty)
-var username = String()
-
-let cancellable = _username
-   .validationChanged
-   .sink { isValid in
-      print(isValid)
-   }
-```
-
 
 ## Featured on
 
@@ -183,7 +191,7 @@ Contributions are very welcome 🙌
 
 ```
 ValidatedPropertyKit
-Copyright (c) 2020 Sven Tiigi sven.tiigi@gmail.com
+Copyright (c) 2021 Sven Tiigi sven.tiigi@gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
