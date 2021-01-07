@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D30DFC2256A890000F68068 /* Validation+Always.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Always.swift */; };
-		3D30DFC3256A890000F68068 /* Validation+Always.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Always.swift */; };
-		3D30DFC4256A890000F68068 /* Validation+Always.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Always.swift */; };
-		3D30DFC5256A890000F68068 /* Validation+Always.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Always.swift */; };
+		3D30DFC2256A890000F68068 /* Validation+Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Constant.swift */; };
+		3D30DFC3256A890000F68068 /* Validation+Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Constant.swift */; };
+		3D30DFC4256A890000F68068 /* Validation+Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Constant.swift */; };
+		3D30DFC5256A890000F68068 /* Validation+Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D30DFC1256A890000F68068 /* Validation+Constant.swift */; };
 		3D4040F725A4745500F30306 /* Validation+BinaryInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4040F625A4745500F30306 /* Validation+BinaryInteger.swift */; };
 		3D4040F825A4745500F30306 /* Validation+BinaryInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4040F625A4745500F30306 /* Validation+BinaryInteger.swift */; };
 		3D4040F925A4745500F30306 /* Validation+BinaryInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4040F625A4745500F30306 /* Validation+BinaryInteger.swift */; };
@@ -135,7 +135,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3D30DFC1256A890000F68068 /* Validation+Always.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validation+Always.swift"; sourceTree = "<group>"; };
+		3D30DFC1256A890000F68068 /* Validation+Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validation+Constant.swift"; sourceTree = "<group>"; };
 		3D4040F625A4745500F30306 /* Validation+BinaryInteger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validation+BinaryInteger.swift"; sourceTree = "<group>"; };
 		3D512B6025A451F000753C4E /* Optionalable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optionalable.swift; sourceTree = "<group>"; };
 		3D512B6C25A4520600753C4E /* Optional+Optionalable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Optionalable.swift"; sourceTree = "<group>"; };
@@ -357,7 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				3DDD976E2569C26E006FE065 /* Validation.swift */,
-				3D30DFC1256A890000F68068 /* Validation+Always.swift */,
+				3D30DFC1256A890000F68068 /* Validation+Constant.swift */,
 				3DDD97B12569C752006FE065 /* Validation+LogicalOperators.swift */,
 				3DDD97BD2569C96C006FE065 /* Validation+ComparisonOperators.swift */,
 				3DDD97A52569C661006FE065 /* Validation+String.swift */,
@@ -768,7 +768,7 @@
 				3DDD976F2569C26E006FE065 /* Validation.swift in Sources */,
 				3D59C06225A3D72100B94734 /* Validatable+LogicalOperators.swift in Sources */,
 				3D512B6D25A4520600753C4E /* Optional+Optionalable.swift in Sources */,
-				3D30DFC2256A890000F68068 /* Validation+Always.swift in Sources */,
+				3D30DFC2256A890000F68068 /* Validation+Constant.swift in Sources */,
 				3DDD97A62569C661006FE065 /* Validation+String.swift in Sources */,
 				3D59C03A25A3D10400B94734 /* Validatable.swift in Sources */,
 				3DDD97F52569CA75006FE065 /* Validation+Comparable.swift in Sources */,
@@ -792,7 +792,7 @@
 				3DDD97702569C26E006FE065 /* Validation.swift in Sources */,
 				3D59C06325A3D72100B94734 /* Validatable+LogicalOperators.swift in Sources */,
 				3D512B6E25A4520600753C4E /* Optional+Optionalable.swift in Sources */,
-				3D30DFC3256A890000F68068 /* Validation+Always.swift in Sources */,
+				3D30DFC3256A890000F68068 /* Validation+Constant.swift in Sources */,
 				3DDD97A72569C661006FE065 /* Validation+String.swift in Sources */,
 				3D59C03B25A3D10400B94734 /* Validatable.swift in Sources */,
 				3DDD97F62569CA75006FE065 /* Validation+Comparable.swift in Sources */,
@@ -816,7 +816,7 @@
 				3DDD97712569C26E006FE065 /* Validation.swift in Sources */,
 				3D59C06425A3D72100B94734 /* Validatable+LogicalOperators.swift in Sources */,
 				3D512B6F25A4520600753C4E /* Optional+Optionalable.swift in Sources */,
-				3D30DFC4256A890000F68068 /* Validation+Always.swift in Sources */,
+				3D30DFC4256A890000F68068 /* Validation+Constant.swift in Sources */,
 				3DDD97A82569C661006FE065 /* Validation+String.swift in Sources */,
 				3D59C03C25A3D10400B94734 /* Validatable.swift in Sources */,
 				3DDD97F72569CA75006FE065 /* Validation+Comparable.swift in Sources */,
@@ -840,7 +840,7 @@
 				3DDD97722569C26E006FE065 /* Validation.swift in Sources */,
 				3D59C06525A3D72100B94734 /* Validatable+LogicalOperators.swift in Sources */,
 				3D512B7025A4520600753C4E /* Optional+Optionalable.swift in Sources */,
-				3D30DFC5256A890000F68068 /* Validation+Always.swift in Sources */,
+				3D30DFC5256A890000F68068 /* Validation+Constant.swift in Sources */,
 				3DDD97A92569C661006FE065 /* Validation+String.swift in Sources */,
 				3D59C03D25A3D10400B94734 /* Validatable.swift in Sources */,
 				3DDD97F82569CA75006FE065 /* Validation+Comparable.swift in Sources */,

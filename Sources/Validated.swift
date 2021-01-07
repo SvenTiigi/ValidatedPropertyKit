@@ -106,11 +106,11 @@ public extension Validated where Value: Optionalable {
     /// - Parameters:
     ///   - wrappedValue: The wrapped `Value`. Default value `nil`
     ///   - validation: The `Validation` for the `Wrapped` value type
-    ///   - nilValidation: The `Validation` if the Value  is nil. Default value `.always(false)`
+    ///   - nilValidation: The `Validation` if the Value  is nil. Default value `.constant(false)`
     init(
         wrappedValue: Value = nil,
         _ validation: Validation<Value.Wrapped>,
-        nilValidation: Validation<Void> = .always(false)
+        nilValidation: Validation<Void> = .constant(false)
     ) {
         self.init(
             wrappedValue: wrappedValue,

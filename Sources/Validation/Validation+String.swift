@@ -71,11 +71,11 @@ public extension Validation where Value == String {
     /// Validation with RegularExpression Pattern
     /// - Parameters:
     ///   - pattern: The RegularExpression Pattern
-    ///   - onInvalidPatternValidation: The Validation that should be used when the pattern is invalid. Default value `.always(false)`
+    ///   - onInvalidPatternValidation: The Validation that should be used when the pattern is invalid. Default value `.constant(false)`
     ///   - matchingOptions: The NSRegularExpression.MatchingOptions. Default value `.init`
     static func regularExpression(
         _ pattern: String,
-        onInvalidPatternValidation: @autoclosure @escaping () -> Validation<Void> = .always(false),
+        onInvalidPatternValidation: @autoclosure @escaping () -> Validation<Void> = .constant(false),
         matchingOptions: NSRegularExpression.MatchingOptions = .init()
     ) -> Self {
         do {

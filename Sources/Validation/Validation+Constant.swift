@@ -1,5 +1,5 @@
 //
-//  Validation+Always.swift
+//  Validation+Constant.swift
 //  ValidatedPropertyKit
 //
 //  Created by Sven Tiigi on 22.11.20.
@@ -8,13 +8,13 @@
 
 import Foundation
 
-// MARK: - Validation+Always
+// MARK: - Validation+Constant
 
 public extension Validation {
     
-    /// Always Validation which always evalutes to a given Bool value
+    /// Constant Validation which always evalutes to a given Bool value
     /// - Parameter isValid: The isValid Bool value
-    static func always(
+    static func constant(
         _ isValid: Bool = true
     ) -> Self {
         .init { _ in isValid }
