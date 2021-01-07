@@ -25,4 +25,14 @@ public extension Validation {
         }
     }
     
+    /// Validation that checks if a given Bool value KeyPath evaluates to `true`
+    /// - Parameter keyPath: The Bool value KeyPath
+    static func keyPath(
+        _ keyPath: KeyPath<Value, Bool>
+    ) -> Self {
+        .init { value in
+            value[keyPath: keyPath]
+        }
+    }
+    
 }
