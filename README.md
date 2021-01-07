@@ -117,9 +117,7 @@ Or navigate to your Xcode project then select `Swift Packages`, click the “+�
 
 If you prefer not to use any of the aforementioned dependency managers, you can integrate ValidatedPropertyKit into your project manually. Simply drag the `Sources` Folder into your Xcode project.
 
-## Usage
-
-### Validated 👮‍♂️
+## Validated 👮‍♂️
 
 The `@Validated` attribute allows you to specify a validation along to the declaration of your property.
 
@@ -127,7 +125,7 @@ The `@Validated` attribute allows you to specify a validation along to the decla
 @Validated(!.isEmpty)
 var username = String()
 
-@Validated(.isURL && .hasPrefix("https"))
+@Validated(.hasPrefix("https"))
 var avatarURL: String?
 ```
 
@@ -136,12 +134,12 @@ If `@Validated` is applied on an optional type e.g. `String?` you can specify wh
 ```swift
 @Validated(
    .isURL && .hasPrefix("https"), 
-   nilValidation: .always(false)
+   nilValidation: .constant(false)
 )
 var avatarURL: String?
 ```
 
-> By default the argument `nilValidation` is set to `.always(false)`
+> By default the argument `nilValidation` is set to `.constant(false)`
 
 In addition the `SwiftUI.View` extension `validated()` allows you to disable or enable a certain `SwiftUI.View` by specifying which `Validated` instances should evalute to `true`.
 
@@ -159,11 +157,57 @@ Button(
 .validated(self._mailAddress, self._password)
 ```
 
-### Validation 🚦
+> By using the underscore notation you are passing the `@Validated` property wrapper to the `validated()` function
 
-Use the projected value of a `@Validated` or `@OptionalValidated` property wrapper to access the result of the validation.
+## Validation 🚦
 
-The projected value of the `Validated` property wrapper can be accessed via the (`$`) notation.
+Each `@Validated` attribute will be initialized with a `Validation` which can be initialized with a simple closure that must return a `Bool` value.
+
+```swift
+@Validated(.init { value in
+   value.isEmpty
+})
+var username = String()
+```
+
+Therefore, ValidatedPropertyKit comes along with many built-in convenience functions for various types and protocols.
+
+```swift
+@Validated(.contains("iOS"))
+var favoriteOperatingSystem = String()
+
+@Validated(.equals(42))
+var magicNumber = Int()
+
+@Validated(.keyPath(\.isEnabled, .equals(true)))
+var object = MyCustomObject()
+```
+
+Additionally, you can extend the `Validation` via conditional conformance to easily declare your own Validations.
+
+```swift
+extension Validation where Value == Int {
+
+    /// Will validate if the Integer is the meaning of life
+    static var isMeaningOfLife: Self {
+        .init { value in
+            value == 42
+        }
+    }
+
+}
+```
+
+And apply them to your validated property.
+
+```swift
+@Validated(.isMeaningOfLife)
+var number = Int()
+```
+
+## isValid ✅
+
+You can access the `isValid` state at anytime by using the underscore notation to directly access the `@Validated` property wrapper.
 
 ```swift
 @Validated(!.isEmpty)
@@ -174,6 +218,24 @@ print(_username.isValid) // true
 
 username = ""
 print(_username.isValid) // false
+```
+
+## Validation Operators 🔗
+
+Validation Operators allowing you to combine multiple Validations like you would do with Bool values.
+
+```swift
+// Logical AND
+@Validated(.hasPrefix("https") && .hasSuffix("png"))
+var avatarURL = String()
+
+// Logical OR
+@Validated(.hasPrefix("Mr.") || .hasPrefix("Mrs."))
+var name = String()
+
+// Logical NOT
+@Validated(!.contains("Android", options: .caseInsensitive))
+var favoriteOperatingSystem = String()
 ```
 
 ## Featured on
