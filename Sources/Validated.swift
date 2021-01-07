@@ -92,8 +92,8 @@ public struct Validated<Value>: DynamicProperty, Validatable {
             // Otherwise return out of function
             return
         }
-        // Re-Apply value
-        self.wrappedValue = self.storage.value
+        // Perform Validation
+        self.storage.validate()
     }
     
 }
@@ -139,8 +139,8 @@ private extension Validated {
                 self.objectWillChange.send()
             }
             didSet {
-                // Validate value
-                self.isValid = self.validation.isValid(value: self.value)
+                // Perform Validation
+                self.validate()
             }
         }
         
@@ -162,6 +162,14 @@ private extension Validated {
         ) {
             self.value = value
             self.validation = validation
+            self.isValid = self.validation.isValid(value: self.value)
+        }
+        
+        // MARK: Validate
+        
+        /// Perform Validation
+        func validate() {
+            // Validate value
             self.isValid = self.validation.isValid(value: self.value)
         }
         
