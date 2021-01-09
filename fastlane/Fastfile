@@ -75,16 +75,6 @@ platform :ios do
       scheme: "ValidatedPropertyKit-iOS",
       clean: true
     )
-    # Perform tvOS Tests
-    scan(
-      project: "ValidatedPropertyKit.xcodeproj",
-      scheme: "ValidatedPropertyKit-tvOS",
-      clean: true
-    )
-    # Perform macOS Tests
-    spm(command: "test")
-    # Delete SPM build artifacts
-    spm(command: "clean")
   end
 
   desc "Run Dependency-Manager compatibility tests"
