@@ -119,7 +119,7 @@ If you prefer not to use any of the aforementioned dependency managers, you can 
 
 ## Validated 👮‍♂️
 
-The `@Validated` attribute allows you to specify a validation along to the declaration of your property.
+The `@Validated` attribute allows you to specify a validation alongside to the declaration of your property.
 
 > ☝️ @Validated supports SwiftUI View updates and will basically work the same way as @State does.
 
@@ -143,7 +143,7 @@ var avatarURL: String?
 
 > By default the argument `nilValidation` is set to `.constant(false)`
 
-In addition the `SwiftUI.View` extension `validated()` allows you to disable or enable a certain `SwiftUI.View` by specifying which `Validated` instances should evalute to `true`.
+In addition the `SwiftUI.View` extension `validated()` allows you to disable or enable a certain `SwiftUI.View` based on your `@Validated` properties. The `validated()` function will disable the `SwiftUI.View` if at least one of the passed in `@Validated` properties evaluates to `false`.
 
 ```swift
 @Validated(!.isEmpty && .contains("@"))
@@ -184,6 +184,7 @@ var magicNumber = Int()
 @Validated(.keyPath(\.isEnabled, .equals(true)))
 var object = MyCustomObject()
 ```
+> Head over the [Predefined Validations](https://github.com/SvenTiigi/ValidatedPropertyKit#predefined-validations) section to learn more
 
 Additionally, you can extend the `Validation` via conditional conformance to easily declare your own Validations.
 
@@ -238,6 +239,88 @@ var name = String()
 // Logical NOT
 @Validated(!.contains("Android", options: .caseInsensitive))
 var favoriteOperatingSystem = String()
+```
+
+## Predefined Validations
+
+The `ValidatedPropertyKit` comes with many predefined common validations which you can make use of in order to specify a `Validation` for your validated property.
+
+**KeyPath**
+
+The `keyPath` validation will allow you to specify a validation for a given `KeyPath` of the attributed property.
+
+```swift
+@Validated(.keyPath(\.isEnabled, .equals(true)))
+var object = MyCustomObject()
+```
+
+**Strings**
+
+A String property can be validated in many ways like `contains`, `hasPrefix` and even `RegularExpressions`. 
+
+```swift
+@Validated(.contains("Mr.Robot"))
+var string = String()
+
+@Validated(.hasPrefix("Mr."))
+var string = String()
+
+@Validated(.hasSuffix("OS"))
+var string = String()
+
+@Validated(.regularExpression("[0-9]+$"))
+var string = String()
+```
+
+**Equatable**
+
+A `Equatable` type can be validated against a specified value. 
+
+```swift
+@Validated(.equals(42))
+var number = Int()
+```
+
+**Sequence**
+
+A property of type `Sequence` can be validated via the `contains` or `startsWith` validation.
+
+```swift
+@Validated(.contains("Mr.Robot", "Elliot"))
+var sequence = [String]()
+
+@Validated(.startsWith("First Entry"))
+var sequence = [String]()
+```
+
+**Collection**
+
+Every `Collection` type offers the `isEmpty` validation and the `range` validation where you can easily declare the valid capacity.
+
+```swift
+@Validated(!.isEmpty)
+var collection = [String]()
+
+@Validated(.range(1...10))
+var collection = [String]()
+```
+
+**Comparable**
+
+A `Comparable` type can be validated with all common comparable operators.
+
+```swift
+@Validated(.less(50))
+var comparable = Int()
+
+@Validated(.lessOrEqual(50))
+var comparable = Int()
+
+@Validated(.greater(50))
+var comparable = Int()
+
+@Validated(.greaterOrEqual(50))
+var comparable = Int()
 ```
 
 ## Featured on
