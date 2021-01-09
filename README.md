@@ -156,7 +156,7 @@ Button(
    action: {},
    label: { Text("Submit") }
 )
-.validated(self._mailAddress, self._password)
+.validated(self._mailAddress && self._password)
 ```
 
 > By using the underscore notation you are passing the `@Validated` property wrapper to the `validated()` function
