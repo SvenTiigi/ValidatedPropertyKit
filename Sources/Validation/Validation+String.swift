@@ -8,6 +8,40 @@
 
 import Foundation
 
+// MARK: - Validation+String
+
+public extension Validation where Value == String {
+    
+    /// Validation if a given String is a valid mail address
+    static func isEmail() -> Self {
+        .init { value in
+            // Initialize NSDataDetector with link checking type
+            let detector = try? NSDataDetector(
+                types: NSTextCheckingResult.CheckingType.link.rawValue
+            )
+            // Initialize Range from value
+            let range = NSRange(
+                value.startIndex..<value.endIndex,
+                in: value
+            )
+            // Retrieve matches from value
+            let matches = detector?.matches(
+                in: value,
+                options: [],
+                range: range
+            )
+            // Verify first Match is available
+            guard let match = matches?.first else {
+                // Otherwise return false
+                return false
+            }
+            // Return bool value if match URL scheme is `mailto` and range matches
+            return match.url?.scheme == "mailto" && match.range == range
+        }
+    }
+    
+}
+
 // MARK: - Validation+StringProtocol
 
 public extension Validation where Value: StringProtocol {
@@ -19,7 +53,7 @@ public extension Validation where Value: StringProtocol {
     static func contains<S: StringProtocol>(
         _ string: S,
         options: NSString.CompareOptions = .init()
-    ) -> Validation {
+    ) -> Self {
         .init { value in
             value.range(of: string, options: options) != nil
         }
@@ -29,7 +63,7 @@ public extension Validation where Value: StringProtocol {
     /// - Parameter prefix: The prefix
     static func hasPrefix<S: StringProtocol>(
         _ prefix: S
-    ) -> Validation {
+    ) -> Self {
         .init { value in
             value.hasPrefix(prefix)
         }
@@ -39,7 +73,7 @@ public extension Validation where Value: StringProtocol {
     /// - Parameter suffix: The suffix
     static func hasSuffix<S: StringProtocol>(
         _ suffix: S
-    ) -> Validation {
+    ) -> Self {
         .init { value in
             value.hasSuffix(suffix)
         }
