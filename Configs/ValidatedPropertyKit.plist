@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
+	<string>0.0.5</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -25,6 +25,6 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2020 Sven Tiigi. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
-	<string></string>
+	<string/>
 </dict>
 </plist>
