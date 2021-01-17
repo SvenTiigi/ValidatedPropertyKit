@@ -41,7 +41,7 @@
 ```swift
 struct LoginView: View {
     
-    @Validated(!.isEmpty && .contains("@"))
+    @Validated(!.isEmpty && .isEmail)
     var mailAddress = String()
     
     @Validated(.range(8...))
@@ -175,7 +175,7 @@ var username = String()
 Therefore, ValidatedPropertyKit comes along with many built-in convenience functions for various types and protocols.
 
 ```swift
-@Validated(.contains("iOS"))
+@Validated(!.contains("Android", options: .caseInsensitive))
 var favoriteOperatingSystem = String()
 
 @Validated(.equals(42))
@@ -259,6 +259,9 @@ var object = MyCustomObject()
 A String property can be validated in many ways like `contains`, `hasPrefix` and even `RegularExpressions`. 
 
 ```swift
+@Validated(.isEmail)
+var string = String()
+
 @Validated(.contains("Mr.Robot"))
 var string = String()
 
