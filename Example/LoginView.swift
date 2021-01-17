@@ -11,7 +11,7 @@ import ValidatedPropertyKit
 
 struct LoginView: View {
     
-    @Validated(!.isEmpty && .contains("@"))
+    @Validated(!.isEmpty && .isEmail)
     var mailAddress = String()
     
     @Validated(.range(8...))
