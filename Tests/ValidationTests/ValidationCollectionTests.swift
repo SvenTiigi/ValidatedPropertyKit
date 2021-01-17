@@ -11,17 +11,12 @@ import XCTest
 
 class ValidationCollectionTests: XCTestCase {
     
-    static var allTests = [
-        ("testNonEmpty", testNonEmpty),
-        ("testRange", testRange)
-    ]
-    
     func testNonEmpty() {
         let validStrings = ["1"]
         let invalidStrings: [String] = .init()
-        let validation = Validation<[String]>.nonEmpty
-        XCTAssert(validation.isValid(value: validStrings).isSuccess)
-        XCTAssertFalse(validation.isValid(value: invalidStrings).isSuccess)
+        let validation = !Validation<[String]>.isEmpty
+        XCTAssert(validation.isValid(value: validStrings))
+        XCTAssertFalse(validation.isValid(value: invalidStrings))
     }
     
     func testRange() {
@@ -36,10 +31,10 @@ class ValidationCollectionTests: XCTestCase {
         }
         let fakeRangeExpressionTrue = FakeRangeExpression(containsResult: true)
         let validatedTrue = Validation<[String]>.range(fakeRangeExpressionTrue)
-        XCTAssert(validatedTrue.isValid(value: .init()).isSuccess)
+        XCTAssert(validatedTrue.isValid(value: .init()))
         let fakeRangeExpressionFalse = FakeRangeExpression(containsResult: false)
         let validatedFalse = Validation<[String]>.range(fakeRangeExpressionFalse)
-        XCTAssertFalse(validatedFalse.isValid(value: .init()).isSuccess)
+        XCTAssertFalse(validatedFalse.isValid(value: .init()))
     }
     
 }

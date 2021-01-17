@@ -10,15 +10,11 @@
 import XCTest
 
 class ValidationEquatableTests: XCTestCase {
-
-    static var allTests = [
-        ("testEqual", testEqual)
-    ]
     
     func testEqual() {
         let validation = Validation<String>.equals("1")
-        XCTAssert(validation.isValid(value: "1").isSuccess)
-        XCTAssertFalse(validation.isValid(value: "0").isSuccess)
+        XCTAssert(validation.isValid(value: "1"))
+        XCTAssertFalse(validation.isValid(value: "0"))
     }
     
 }

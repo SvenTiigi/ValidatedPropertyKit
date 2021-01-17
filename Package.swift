@@ -1,14 +1,14 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 
 import PackageDescription
 
 let package = Package(
     name: "ValidatedPropertyKit",
     platforms: [
-        .iOS(.v8),
-        .tvOS(.v9),
-        .watchOS(.v2),
-        .macOS(.v10_10)
+        .iOS(.v14),
+        .tvOS(.v14),
+        .watchOS(.v7),
+        .macOS(.v11)
     ],
     products: [
         .library(

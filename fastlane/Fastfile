@@ -12,6 +12,8 @@ platform :ios do
     ensure_git_branch(branch: 'master')
     # Perform Dependency-Manager compatibility tests
     compatibilityTests
+    # Perform Tests
+    tests
     # Retrieve Version from options
     version = options[:version]
     # Increment Version
@@ -47,12 +49,19 @@ platform :ios do
       key: "CFBundleShortVersionString", 
       value: version
     )
+    # Set Example plist version
+    set_info_plist_value(
+      path: "Example/Resources/Info.plist", 
+      key: "CFBundleShortVersionString", 
+      value: version
+    )
     # Commit modified files
     git_commit(
         path: [
           "ValidatedPropertyKit.podspec", 
           "Configs/ValidatedPropertyKit.plist", 
-          "Configs/ValidatedPropertyKitTests.plist"
+          "Configs/ValidatedPropertyKitTests.plist", 
+          "Example/Resources/Info.plist"
         ],
         message: "ValidatedPropertyKit Version #{version} 🚀"
     )
@@ -66,26 +75,10 @@ platform :ios do
       scheme: "ValidatedPropertyKit-iOS",
       clean: true
     )
-    # Perform tvOS Tests
-    scan(
-      project: "ValidatedPropertyKit.xcodeproj",
-      scheme: "ValidatedPropertyKit-tvOS",
-      clean: true
-    )
-    # Perform macOS Tests
-    spm(command: "test")
-    # Delete SPM build artifacts
-    spm(command: "clean")
   end
 
   desc "Run Dependency-Manager compatibility tests"
   lane :compatibilityTests do
-    # Carthage build to ensure Carthage compatibility
-    carthage(
-      command: "build", 
-      no_skip_current: true, 
-      cache_builds: true
-    )
     # Pod lib lint to ensure CocoaPods compatibility
     pod_lib_lint(allow_warnings: true)
     # SPM Build to ensure Swift Package Manager compatibility

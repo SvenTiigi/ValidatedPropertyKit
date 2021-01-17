@@ -1,9 +1,9 @@
 //
 //  Validation+Equatable.swift
-//  ValidatedPropertyKit-iOS
+//  ValidatedPropertyKit
 //
-//  Created by Sven Tiigi on 20.06.19.
-//  Copyright © 2019 Sven Tiigi. All rights reserved.
+//  Created by Sven Tiigi on 21.11.20.
+//  Copyright © 2020 Sven Tiigi. All rights reserved.
 //
 
 import Foundation
@@ -13,16 +13,12 @@ import Foundation
 public extension Validation where Value: Equatable {
     
     /// Returns a Validation indicating whether two values are equal.
-    ///
     /// - Parameter equatableValue: The Equatable value
-    /// - Returns: A Validation
-    static func equals(_ equatableValue: Value) -> Validation {
-        return .init { value in
-            if value == equatableValue {
-                return .success
-            } else {
-                return .failure("\(value) is not equal to \(equatableValue)")
-            }
+    static func equals(
+        _ equatableValue: Value
+    ) -> Self {
+        .init { value in
+            value == equatableValue
         }
     }
     

@@ -39,22 +39,32 @@
 <br/>
 
 ```swift
-struct User {
+struct LoginView: View {
     
-    @Validated(.nonEmpty)
-    var username: String?
-    
-    @Validated(.isEmail)
-    var email: String?
+    @Validated(!.isEmpty && .isEmail)
+    var mailAddress = String()
     
     @Validated(.range(8...))
-    var password: String?
+    var password = String()
     
-    @Validated(.greaterOrEqual(1))
-    var friends: Int?
-    
-    @Validated(.isURL && .hasPrefix("https"))
-    var avatarURL: String?
+    var body: some View {
+        List {
+            TextField("E-Mail", text: self.$mailAddress)
+            TextField("Password", text: self.$password)
+            Button(
+                action: {
+                    print("Login", self.mailAddress, self.password)
+                },
+                label: {
+                    Text("Submit")
+                }
+            )
+            .validated(
+                self._mailAddress,
+                self._password
+            )
+        }
+    }
     
 }
 ```
@@ -97,60 +107,94 @@ To integrate using Apple's [Swift Package Manager](https://swift.org/package-man
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/SvenTiigi/ValidatedPropertyKit.git", from: "0.0.3")
+    .package(url: "https://github.com/SvenTiigi/ValidatedPropertyKit.git", from: "0.0.5")
 ]
 ```
 
 Or navigate to your Xcode project then select `Swift Packages`, click the “+” icon and search for `ValidatedPropertyKit`.
 
-<p align="center">
-<img width="80%" src="https://raw.githubusercontent.com/SvenTiigi/ValidatedPropertyKit/gh-pages/readMeAssets/XcodeSPM.png" alt="Xcode SPM">
-</p>
-
 ### Manually
 
 If you prefer not to use any of the aforementioned dependency managers, you can integrate ValidatedPropertyKit into your project manually. Simply drag the `Sources` Folder into your Xcode project.
 
-## Usage
+## Validated 👮‍♂️
 
-### Validated 👮‍♂️
+The `@Validated` attribute allows you to specify a validation alongside to the declaration of your property.
 
-The `@Validated` attribute allows you to specify a validation along to the declaration of your property.
-
-It is important to say that the `@Validated` attribute can only be applied to mutable [`Optional`](https://developer.apple.com/documentation/swift/optional) types as a validation can either succeed or fail.
+> ☝️ @Validated supports SwiftUI View updates and will basically work the same way as @State does.
 
 ```swift
-@Validated(.nonEmpty)
-var username: String?
+@Validated(!.isEmpty)
+var username = String()
 
-username = "Mr.Robot"
-print(username) // "Mr.Robot"
-
-username = ""
-print(username) // nil
+@Validated(.hasPrefix("https"))
+var avatarURL: String?
 ```
 
-### Validation 🚦
+If `@Validated` is applied on an optional type e.g. `String?` you can specify whether the validation should fail or succeed when the value is `nil`.
 
-Every `@Validated` attribute must be initialized with a `Validation` which will be initialized with a closure.
+```swift
+@Validated(
+   .isURL && .hasPrefix("https"), 
+   nilValidation: .constant(false)
+)
+var avatarURL: String?
+```
+
+> By default the argument `nilValidation` is set to `.constant(false)`
+
+In addition the `SwiftUI.View` extension `validated()` allows you to disable or enable a certain `SwiftUI.View` based on your `@Validated` properties. The `validated()` function will disable the `SwiftUI.View` if at least one of the passed in `@Validated` properties evaluates to `false`.
+
+```swift
+@Validated(!.isEmpty && .contains("@"))
+var mailAddress = String()
+    
+@Validated(.range(8...))
+var password = String()
+
+Button(
+   action: {},
+   label: { Text("Submit") }
+)
+.validated(self._mailAddress && self._password)
+```
+
+> By using the underscore notation you are passing the `@Validated` property wrapper to the `validated()` function
+
+## Validation 🚦
+
+Each `@Validated` attribute will be initialized with a `Validation` which can be initialized with a simple closure that must return a `Bool` value.
 
 ```swift
 @Validated(.init { value in
-   value.isEmpty ? .failure("String is empty") : .success(())
+   value.isEmpty
 })
-var username: String?
+var username = String()
 ```
-> ☝️ Check out the [Predefined Validations](https://github.com/SvenTiigi/ValidatedPropertyKit#predefined-validations) section to get an overview of the many predefined validations.
 
-Additionally, you can extend the `Validation` struct via `conditional conformance` to easily declare your own `Validations`.
+Therefore, ValidatedPropertyKit comes along with many built-in convenience functions for various types and protocols.
+
+```swift
+@Validated(!.contains("Android", options: .caseInsensitive))
+var favoriteOperatingSystem = String()
+
+@Validated(.equals(42))
+var magicNumber = Int()
+
+@Validated(.keyPath(\.isEnabled, .equals(true)))
+var object = MyCustomObject()
+```
+> Head over the [Predefined Validations](https://github.com/SvenTiigi/ValidatedPropertyKit#predefined-validations) section to learn more
+
+Additionally, you can extend the `Validation` via conditional conformance to easily declare your own Validations.
 
 ```swift
 extension Validation where Value == Int {
 
     /// Will validate if the Integer is the meaning of life
-    static var isMeaningOfLife: Validation {
-        return .init { value in
-            value == 42 ? .success(()) : .failure("\(value) isn't the meaning of life")
+    static var isMeaningOfLife: Self {
+        .init { value in
+            value == 42
         }
     }
 
@@ -161,64 +205,16 @@ And apply them to your validated property.
 
 ```swift
 @Validated(.isMeaningOfLife)
-var number: Int?
+var number = Int()
 ```
 
-### Error Handling 🕵️‍♂️
+## isValid ✅
 
-Each property that is declared with the `@Validated` attribute can make use of advanced functions and properties from the `Validated` Property Wrapper itself via the `_` notation prefix.
-
-Beside doing a simple `nil` check on your `@Validated` property to ensure if the value is valid or not you can access the `validatedValue` or `validationError` property to retrieve the `ValidationError` or the valid value.
+You can access the `isValid` state at anytime by using the underscore notation to directly access the `@Validated` property wrapper.
 
 ```swift
-@Validated(.nonEmpty)
-var username: String?
-
-// Switch on `validatedValue`
-switch _username.validatedValue {
-case .success(let value):
-    // Value is valid ✅
-    break
-case .failure(let validationError):
-    // Value is invalid ⛔️
-    break
-}
-
-// Or unwrap the `validationError`
-if let validationError = _username.validationError {
-    // Value is invalid ⛔️
-} else {
-    // Value is valid ✅
-}
-
-```
-
-### Restore ↩️
-
-Additionally, you can `restore` your `@Validated` property to the last successful validated value.
-
-```swift
-@Validated(.nonEmpty)
-var username: String?
-
-username = "Mr.Robot"
-print(username) // "Mr.Robot"
-
-username = ""
-print(username) // nil
-
-// Restore to last successful validated value
-_username.restore()
-print(username) // "Mr.Robot"
-```
-
-### isValid ✅
-
-As the aforementioned `restore()` function you can also access the `isValid` Bool value property to check if the current value is valid.
-
-```swift
-@Validated(.nonEmpty)
-var username: String?
+@Validated(!.isEmpty)
+var username = String()
 
 username = "Mr.Robot"
 print(_username.isValid) // true
@@ -227,25 +223,25 @@ username = ""
 print(_username.isValid) // false
 ```
 
-### Validation Operators 🔗
+## Validation Operators 🔗
 
 Validation Operators allowing you to combine multiple Validations like you would do with Bool values.
 
 ```swift
 // Logical AND
-@Validated(.isURL && .hasPrefix("https"))
-var avatarURL: String?
+@Validated(.hasPrefix("https") && .hasSuffix("png"))
+var avatarURL = String()
 
 // Logical OR
 @Validated(.hasPrefix("Mr.") || .hasPrefix("Mrs."))
-var name: String?
+var name = String()
 
 // Logical NOT
 @Validated(!.contains("Android", options: .caseInsensitive))
-var favoriteOperatingSystem: String?
+var favoriteOperatingSystem = String()
 ```
 
-### Predefined Validations
+## Predefined Validations
 
 The `ValidatedPropertyKit` comes with many predefined common validations which you can make use of in order to specify a `Validation` for your validated property.
 
@@ -255,7 +251,7 @@ The `keyPath` validation will allow you to specify a validation for a given `Key
 
 ```swift
 @Validated(.keyPath(\.isEnabled, .equals(true)))
-var button: UIButton?
+var object = MyCustomObject()
 ```
 
 **Strings**
@@ -263,32 +259,20 @@ var button: UIButton?
 A String property can be validated in many ways like `contains`, `hasPrefix` and even `RegularExpressions`. 
 
 ```swift
+@Validated(.isEmail)
+var string = String()
+
 @Validated(.contains("Mr.Robot"))
-var string: String?
+var string = String()
 
 @Validated(.hasPrefix("Mr."))
-var string: String?
+var string = String()
 
 @Validated(.hasSuffix("OS"))
-var string: String?
+var string = String()
 
 @Validated(.regularExpression("[0-9]+$"))
-var string: String?
-
-@Validated(.isLowercased)
-var string: String?
-
-@Validated(.isUppercased)
-var string: String?
-
-@Validated(.isEmail)
-var string: String?
-
-@Validated(.isURL)
-var string: String?
-
-@Validated(.isNumeric)
-var string: String?
+var string = String()
 ```
 
 **Equatable**
@@ -297,7 +281,7 @@ A `Equatable` type can be validated against a specified value.
 
 ```swift
 @Validated(.equals(42))
-var number: Int?
+var number = Int()
 ```
 
 **Sequence**
@@ -306,22 +290,22 @@ A property of type `Sequence` can be validated via the `contains` or `startsWith
 
 ```swift
 @Validated(.contains("Mr.Robot", "Elliot"))
-var sequence: [String]?
+var sequence = [String]()
 
 @Validated(.startsWith("First Entry"))
-var sequence: [String]?
+var sequence = [String]()
 ```
 
 **Collection**
 
-Every `Collection` type offers the `nonEmpty` validation and the `range` validation where you can easily declare the valid capacity.
+Every `Collection` type offers the `isEmpty` validation and the `range` validation where you can easily declare the valid capacity.
 
 ```swift
-@Validated(.nonEmpty)
-var collection: [String]?
+@Validated(!.isEmpty)
+var collection = [String]()
 
 @Validated(.range(1...10))
-var collection: [String]?
+var collection = [String]()
 ```
 
 **Comparable**
@@ -330,16 +314,16 @@ A `Comparable` type can be validated with all common comparable operators.
 
 ```swift
 @Validated(.less(50))
-var comparable: Int?
+var comparable = Int()
 
 @Validated(.lessOrEqual(50))
-var comparable: Int?
+var comparable = Int()
 
 @Validated(.greater(50))
-var comparable: Int?
+var comparable = Int()
 
 @Validated(.greaterOrEqual(50))
-var comparable: Int?
+var comparable = Int()
 ```
 
 ## Featured on
@@ -357,7 +341,7 @@ Contributions are very welcome 🙌
 
 ```
 ValidatedPropertyKit
-Copyright (c) 2020 Sven Tiigi sven.tiigi@gmail.com
+Copyright (c) 2021 Sven Tiigi sven.tiigi@gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
