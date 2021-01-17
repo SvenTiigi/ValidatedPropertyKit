@@ -15,7 +15,7 @@ public extension Validation {
     /// Constant Validation which always evalutes to a given Bool value
     /// - Parameter isValid: The isValid Bool value
     static func constant(
-        _ isValid: Bool = true
+        _ isValid: Bool
     ) -> Self {
         .init { _ in isValid }
     }
