@@ -13,7 +13,7 @@ import Foundation
 public extension Validation where Value == String {
     
     /// Validation if a given String is a valid mail address
-    static func isEmail() -> Self {
+    static var isEmail: Self {
         .init { value in
             // Initialize NSDataDetector with link checking type
             let detector = try? NSDataDetector(
