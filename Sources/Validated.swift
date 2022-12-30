@@ -1,65 +1,64 @@
-//
-//  Validated.swift
-//  ValidatedPropertyKit
-//
-//  Created by Sven Tiigi on 21.11.20.
-//  Copyright © 2020 Sven Tiigi. All rights reserved.
-//
-
-import Foundation
 import SwiftUI
 
 // MARK: - Validated
 
 /// A Validated PropertyWrapper
 @propertyWrapper
-public struct Validated<Value>: DynamicProperty, Validatable {
+public struct Validated<Value>: Validatable, DynamicProperty {
     
     // MARK: Properties
     
-    /// The Storage
-    @StateObject
-    private var storage: Storage
-    
     /// The Validation
     public var validation: Validation<Value> {
-        self.storage.validation
+        didSet {
+            // Re-Validate
+            self.isValid = self.validation.validate(self.value)
+        }
     }
     
+    /// The Value
+    @State
+    private var value: Value
+    
+    /// Bool value if the value has been modified
+    @State
+    public private(set) var hasChanges = false
+    
     /// Bool value if validated value is valid
-    public var isValid: Bool {
-        self.storage.isValid
-    }
+    @State
+    public private(set) var isValid: Bool
     
     // MARK: PropertyWrapper-Properties
     
-    /// The projected `Binding<Value>`
+    /// The underlying value referenced by the Validated variable
+    public var wrappedValue: Value {
+        get {
+            self.projectedValue.wrappedValue
+        }
+        set {
+            self.projectedValue.wrappedValue = newValue
+        }
+    }
+    
+    /// A binding to the Validated value
     public var projectedValue: Binding<Value> {
         .init(
             get: {
-                self.wrappedValue
+                self.value
             },
             set: { newValue in
-                self.wrappedValue = newValue
+                self.value = newValue
+                if !self.hasChanges {
+                    self.hasChanges.toggle()
+                }
+                self.isValid = self.validation.validate(newValue)
             }
         )
     }
     
-    /// The wrapped Value
-    public var wrappedValue: Value {
-        get {
-            // Return value
-            self.storage.value
-        }
-        nonmutating set {
-            // Update value
-            self.storage.value = newValue
-        }
-    }
-    
     // MARK: Initializer
     
-    /// Designated Initializer
+    /// Creates a new instance of `Validated`
     /// - Parameters:
     ///   - wrappedValue: The wrapped `Value`
     ///   - validation: The `Validation`
@@ -67,112 +66,66 @@ public struct Validated<Value>: DynamicProperty, Validatable {
         wrappedValue: Value,
         _ validation: Validation<Value>
     ) {
-        self._storage = .init(
-            wrappedValue: .init(
-                value: wrappedValue,
-                validation: validation
+        self.validation = validation
+        self._value = .init(
+            initialValue: wrappedValue
+        )
+        self._isValid = .init(
+            initialValue: validation
+                .validate(wrappedValue)
+        )
+    }
+    
+    /// Creates a new instance of `Validated`
+    /// - Parameters:
+    ///   - wrappedValue: The  `WrappedValue`. Default value `nil`
+    ///   - validation: The `Validation`
+    ///   - isNilValid: A closure that returns a Boolean value if `nil` should be treated as valid or not. Default value `false`
+    public init<WrappedValue>(
+        wrappedValue: WrappedValue? = nil,
+        _ validation: Validation<WrappedValue>,
+        isNilValid: @autoclosure @escaping () -> Bool = false
+    ) where WrappedValue? == Value {
+        self.init(
+            wrappedValue: wrappedValue,
+            .init(
+                validation,
+                isNilValid: isNilValid()
             )
         )
     }
     
-    // MARK: Update Validation
+}
+
+// MARK: - Validated+validatedValue
+
+public extension Validated {
     
-    /// Update the Validation
-    /// - Parameters:
-    ///   - reValidateValue: Bool value if current Value should be revalidated with new Validation. Default value `true`
-    ///   - validation: The new Validation
-    public mutating func update(
-        reValidateValue: Bool = true,
-        validation: (Validation<Value>) -> Validation<Value>
-    ) {
-        // Update Validation
-        self.storage.validation = validation(self.validation)
-        // Verify if value should be re-validated
-        guard reValidateValue else {
-            // Otherwise return out of function
-            return
-        }
-        // Perform Validation
-        self.storage.validate()
+    /// The value if is valid otherwise returns `nil`
+    var validatedValue: Value? {
+        self.isValid ? self.value : nil
     }
     
 }
 
-// MARK: - Validated+Optionalable
+// MARK: - Validated+isInvalid
 
-public extension Validated where Value: Optionalable {
+public extension Validated {
     
-    /// Designated Initializer for an optional Value type
-    /// - Parameters:
-    ///   - wrappedValue: The wrapped `Value`. Default value `nil`
-    ///   - validation: The `Validation` for the `Wrapped` value type
-    ///   - nilValidation: The `Validation` if the Value  is nil. Default value `.constant(false)`
-    init(
-        wrappedValue: Value = nil,
-        _ validation: Validation<Value.Wrapped>,
-        nilValidation: Validation<Void> = .constant(false)
-    ) {
-        self.init(
-            wrappedValue: wrappedValue,
-            .init { value in
-                value.wrapped.flatMap(validation.isValid)
-                    ?? nilValidation.isValid(value: ())
-            }
-        )
+    /// A Boolean value if the value is invalid
+    var isInvalid: Bool {
+        !self.isValid
     }
     
 }
 
-// MARK: - Storage
+// MARK: - Validated+isInvalidAfterChanges
 
-private extension Validated {
+public extension Validated {
     
-    /// The Storage
-    final class Storage: ObservableObject {
-        
-        // MARK: Properties
-        
-        /// The Value
-        var value: Value {
-            willSet {
-                // Emit on ObjectWillChange Subject
-                self.objectWillChange.send()
-            }
-            didSet {
-                // Perform Validation
-                self.validate()
-            }
-        }
-        
-        /// The Validation
-        var validation: Validation<Value>
-        
-        /// Bool value if validated value is valid
-        var isValid: Bool
-        
-        // MARK: Initializer
-        
-        /// Designated Initializer
-        /// - Parameters:
-        ///   - value: The Value
-        ///   - validation: The Validation
-        init(
-            value: Value,
-            validation: Validation<Value>
-        ) {
-            self.value = value
-            self.validation = validation
-            self.isValid = self.validation.isValid(value: self.value)
-        }
-        
-        // MARK: Validate
-        
-        /// Perform Validation
-        func validate() {
-            // Validate value
-            self.isValid = self.validation.isValid(value: self.value)
-        }
-        
+    /// A Boolean value if the value is invalid and has been previously modified
+    var isInvalidAfterChanges: Bool {
+        self.hasChanges && !self.isValid
     }
     
 }

@@ -1,11 +1,3 @@
-//
-//  Validation+ComparisonOperators.swift
-//  ValidatedPropertyKit
-//
-//  Created by Sven Tiigi on 21.11.20.
-//  Copyright © 2020 Sven Tiigi. All rights reserved.
-//
-
 import Foundation
 
 // MARK: - Validation+Equal
@@ -21,7 +13,7 @@ public extension Validation {
         rhs: Self
     ) -> Self {
         .init { value in
-            lhs.isValid(value: value) == rhs.isValid(value: value)
+            lhs.validate(value) == rhs.validate(value)
         }
     }
     
@@ -40,7 +32,7 @@ public extension Validation {
         rhs: Self
     ) -> Self {
         .init { value in
-            lhs.isValid(value: value) != rhs.isValid(value: value)
+            lhs.validate(value) != rhs.validate(value)
         }
     }
     

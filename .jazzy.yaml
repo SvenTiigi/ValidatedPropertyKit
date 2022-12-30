@@ -1,7 +1,0 @@
-# ValidatedPropertyKit document generator jazzy settings
-
-copyright: Copyright 2021 Sven Tiigi
-author: Sven Tiigi
-xcodebuild_arguments: [-target, ValidatedPropertyKit-iOS]
-clean: true
-output: ./Documentation

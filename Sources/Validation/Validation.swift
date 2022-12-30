@@ -1,11 +1,3 @@
-//
-//  Validation.swift
-//  ValidatedPropertyKit
-//
-//  Created by Sven Tiigi on 21.11.20.
-//  Copyright © 2020 Sven Tiigi. All rights reserved.
-//
-
 import Foundation
 
 // MARK: - Validation
@@ -25,16 +17,39 @@ public struct Validation<Value> {
     
     // MARK: Initializer
     
-    /// Designated Initializer
-    /// - Parameter predicate: The Predicate
-    public init(predicate: @escaping Predicate) {
+    /// Creates a new instance of `Validation`
+    /// - Parameter predicate: A closure that takes a value and returns a Boolean value if the passed value is valid
+    public init(
+        predicate: @escaping Predicate
+    ) {
         self.predicate = predicate
     }
     
-    /// Validates a value and returns a Bool wether the value is valid or not
-    /// - Parameter value: The value that should be validates
-    /// - Returns: Bool value if the value is valid or invalid
-    func isValid(value: Value) -> Bool {
+    /// Creates a new instance of `Validation`
+    /// - Parameters:
+    ///   - validation: The WrappedValue Validation
+    ///   - isNilValid: A closure that returns a Boolean value if `nil` should be treated as valid or not. Default value `false`
+    public init<WrappedValue>(
+        _ validation: Validation<WrappedValue>,
+        isNilValid: @autoclosure @escaping () -> Bool = false
+    ) where WrappedValue? == Value {
+        self.init { value in
+            value.flatMap(validation.validate) ?? isNilValid()
+        }
+    }
+    
+}
+
+// MARK: - Validate
+
+public extension Validation {
+    
+    /// Validates a value and returns a Boolean value wether the value is valid or invalid
+    /// - Parameter value: The value that should be validated
+    /// - Returns: A Boolen value wether the value is valid or invalid
+    func validate(
+        _ value: Value
+    ) -> Bool {
         self.predicate(value)
     }
     

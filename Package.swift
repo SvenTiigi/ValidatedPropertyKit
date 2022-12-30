@@ -5,28 +5,30 @@ import PackageDescription
 let package = Package(
     name: "ValidatedPropertyKit",
     platforms: [
-        .iOS(.v14),
-        .tvOS(.v14),
-        .watchOS(.v7),
-        .macOS(.v11)
+        .iOS(.v13),
+        .tvOS(.v13),
+        .watchOS(.v6),
+        .macOS(.v10_15)
     ],
     products: [
         .library(
             name: "ValidatedPropertyKit",
-            targets: ["ValidatedPropertyKit"]
-        ),
+            targets: [
+                "ValidatedPropertyKit"
+            ]
+        )
     ],
-    dependencies: [],
     targets: [
         .target(
             name: "ValidatedPropertyKit",
-            dependencies: [],
             path: "Sources"
         ),
         .testTarget(
             name: "ValidatedPropertyKitTests",
-            dependencies: ["ValidatedPropertyKit"],
+            dependencies: [
+                "ValidatedPropertyKit"
+            ],
             path: "Tests"
-        ),
+        )
     ]
 )

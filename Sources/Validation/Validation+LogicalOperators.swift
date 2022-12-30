@@ -1,11 +1,3 @@
-//
-//  Validation+LogicalOperators.swift
-//  ValidatedPropertyKit
-//
-//  Created by Sven Tiigi on 21.11.20.
-//  Copyright © 2020 Sven Tiigi. All rights reserved.
-//
-
 import Foundation
 
 // MARK: - Validation+Not
@@ -18,7 +10,7 @@ public extension Validation {
         validation: Self
     ) -> Self {
         .init { value in
-            !validation.isValid(value: value)
+            !validation.validate(value)
         }
     }
     
@@ -37,7 +29,7 @@ public extension Validation {
         rhs: @autoclosure @escaping () -> Self
     ) -> Self {
         .init { value in
-            lhs.isValid(value: value) && rhs().isValid(value: value)
+            lhs.validate(value) && rhs().validate(value)
         }
     }
     
@@ -56,7 +48,7 @@ public extension Validation {
         rhs: @autoclosure @escaping () -> Self
     ) -> Self {
         .init { value in
-            lhs.isValid(value: value) || rhs().isValid(value: value)
+            lhs.validate(value) || rhs().validate(value)
         }
     }
     

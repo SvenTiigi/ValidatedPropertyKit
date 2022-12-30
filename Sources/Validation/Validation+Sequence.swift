@@ -1,11 +1,3 @@
-//
-//  Validation+Sequence.swift
-//  ValidatedPropertyKit
-//
-//  Created by Sven Tiigi on 21.11.20.
-//  Copyright © 2020 Sven Tiigi. All rights reserved.
-//
-
 import Foundation
 
 // MARK: - Validation+Sequence

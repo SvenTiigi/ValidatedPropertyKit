@@ -1,71 +1,76 @@
+<br/>
+
 <p align="center">
-   <img width="750" src="https://raw.githubusercontent.com/SvenTiigi/ValidatedPropertyKit/gh-pages/readMeAssets/ValidatedPropertyKit.gif" alt="ValidatedPropertyKit Logo">
+   <img width="30%" src="Assets/logo.png" alt="ValidatedPropertyKit Logo">
+</p>
+
+<h1 align="center">
+    ValidatedPropertyKit
+</h1>
+
+<p align="center">
+   A Swift Package to easily validate your properties using Property Wrappers 👮
 </p>
 
 <p align="center">
-   <a href="https://developer.apple.com/swift/">
-      <img src="https://img.shields.io/badge/Swift-5.1-orange.svg?style=flat" alt="Swift 5.1">
+   <a href="https://swiftpackageindex.com/SvenTiigi/ValidatedPropertyKit">
+    <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FSvenTiigi%2FValidatedPropertyKit%2Fbadge%3Ftype%3Dswift-versions" alt="Swift Version">
    </a>
-   <a href="https://github.com/SvenTiigi/ValidatedPropertyKit/actions?query=workflow%3ACI">
-      <img src="https://github.com/SvenTiigi/ValidatedPropertyKit/workflows/CI/badge.svg" alt="CI Status">
-   </a>
-   <a href="http://cocoapods.org/pods/ValidatedPropertyKit">
-      <img src="https://img.shields.io/cocoapods/v/ValidatedPropertyKit.svg?style=flat" alt="Version">
-   </a>
-   <a href="http://cocoapods.org/pods/ValidatedPropertyKit">
-      <img src="https://img.shields.io/cocoapods/p/ValidatedPropertyKit.svg?style=flat" alt="Platform">
+   <a href="https://swiftpackageindex.com/SvenTiigi/ValidatedPropertyKit">
+    <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FSvenTiigi%2FValidatedPropertyKit%2Fbadge%3Ftype%3Dplatforms" alt="Platforms">
    </a>
    <br/>
-   <a href="https://github.com/Carthage/Carthage">
-      <img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible">
+   <a href="https://github.com/SvenTiigi/ValidatedPropertyKit/actions/workflows/build_and_test.yml">
+       <img src="https://github.com/SvenTiigi/ValidatedPropertyKit/actions/workflows/build_and_test.yml/badge.svg" alt="Build and Test Status">
    </a>
-   <a href="https://github.com/apple/swift-package-manager">
-      <img src="https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg" alt="SPM">
-   </a>
-   <a href="https://sventiigi.github.io/ValidatedPropertyKit">
-      <img src="https://github.com/SvenTiigi/ValidatedPropertyKit/blob/gh-pages/badge.svg" alt="Documentation">
+   <a href="https://sventiigi.github.io/ValidatedPropertyKit/documentation/validatedpropertykit/">
+       <img src="https://img.shields.io/badge/Documentation-DocC-blue" alt="Documentation">
    </a>
    <a href="https://twitter.com/SvenTiigi/">
       <img src="https://img.shields.io/badge/Twitter-@SvenTiigi-blue.svg?style=flat" alt="Twitter">
    </a>
 </p>
 
-<br/>
-
-<p align="center">
-   ValidatedPropertyKit enables you to easily validate your properties<br/>with the power of <a href="https://github.com/DougGregor/swift-evolution/blob/property-wrappers/proposals/0258-property-wrappers.md">Property Wrappers</a>.
-</p>
-
-<br/>
-
 ```swift
+import SwiftUI
+import ValidatedPropertyKit
+
 struct LoginView: View {
-    
+
     @Validated(!.isEmpty && .isEmail)
     var mailAddress = String()
-    
+
     @Validated(.range(8...))
     var password = String()
-    
+
     var body: some View {
         List {
-            TextField("E-Mail", text: self.$mailAddress)
-            TextField("Password", text: self.$password)
-            Button(
-                action: {
-                    print("Login", self.mailAddress, self.password)
-                },
-                label: {
-                    Text("Submit")
-                }
+            TextField(
+               "E-Mail",
+               text: self.$mailAddress
             )
+            if self._mailAddress.isInvalidAfterChanges {
+                Text(verbatim: "Please enter a valid E-Mail address.")
+            }
+            TextField(
+               "Password",
+               text: self.$password
+            )
+            if self._password.isInvalidAfterChanges {
+                Text(verbatim: "Please enter a valid password.")
+            }
+            Button {
+               print("Login", self.mailAddress, self.password)
+            } label: {
+               Text(verbatim: "Submit")
+            }
             .validated(
                 self._mailAddress,
                 self._password
             )
         }
     }
-    
+
 }
 ```
 
@@ -78,36 +83,13 @@ struct LoginView: View {
 
 ## Installation
 
-### CocoaPods
-
-ValidatedPropertyKit is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```bash
-pod 'ValidatedPropertyKit'
-```
-
-### Carthage
-
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
-
-To integrate ValidatedPropertyKit into your Xcode project using Carthage, specify it in your `Cartfile`:
-
-```ogdl
-github "SvenTiigi/ValidatedPropertyKit"
-```
-
-Run `carthage update` to build the framework and drag the built `ValidatedPropertyKit.framework` into your Xcode project. 
-
-On your application targets’ “Build Phases” settings tab, click the “+” icon and choose “New Run Script Phase” and add the Framework path as mentioned in [Carthage Getting started Step 4, 5 and 6](https://github.com/Carthage/Carthage/blob/master/README.md#if-youre-building-for-ios-tvos-or-watchos)
-
 ### Swift Package Manager
 
 To integrate using Apple's [Swift Package Manager](https://swift.org/package-manager/), add the following as a dependency to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/SvenTiigi/ValidatedPropertyKit.git", from: "0.0.5")
+    .package(url: "https://github.com/SvenTiigi/ValidatedPropertyKit.git", from: "0.0.6")
 ]
 ```
 
@@ -135,8 +117,8 @@ If `@Validated` is applied on an optional type e.g. `String?` you can specify wh
 
 ```swift
 @Validated(
-   .isURL && .hasPrefix("https"), 
-   nilValidation: .constant(false)
+   .isURL && .hasPrefix("https"),
+   isNilValid: true
 )
 var avatarURL: String?
 ```
@@ -148,7 +130,7 @@ In addition the `SwiftUI.View` extension `validated()` allows you to disable or 
 ```swift
 @Validated(!.isEmpty && .contains("@"))
 var mailAddress = String()
-    
+
 @Validated(.range(8...))
 var password = String()
 
@@ -184,6 +166,7 @@ var magicNumber = Int()
 @Validated(.keyPath(\.isEnabled, .equals(true)))
 var object = MyCustomObject()
 ```
+
 > Head over the [Predefined Validations](https://github.com/SvenTiigi/ValidatedPropertyKit#predefined-validations) section to learn more
 
 Additionally, you can extend the `Validation` via conditional conformance to easily declare your own Validations.
@@ -256,7 +239,7 @@ var object = MyCustomObject()
 
 **Strings**
 
-A String property can be validated in many ways like `contains`, `hasPrefix` and even `RegularExpressions`. 
+A String property can be validated in many ways like `contains`, `hasPrefix` and even `RegularExpressions`.
 
 ```swift
 @Validated(.isEmail)
@@ -277,7 +260,7 @@ var string = String()
 
 **Equatable**
 
-A `Equatable` type can be validated against a specified value. 
+A `Equatable` type can be validated against a specified value.
 
 ```swift
 @Validated(.equals(42))
@@ -326,22 +309,11 @@ var comparable = Int()
 var comparable = Int()
 ```
 
-## Featured on
-
-* [iOS Goodies](https://ios-goodies.com/post/185888580686/week-288)
-* [iOS Dev Weekly](https://iosdevweekly.com/issues/410#start)
-* [Swift Weekly](http://digest.swiftweekly.com/issues/swift-weekly-issue-163-186066)
-* [AppCoda Weekly](http://digest.appcoda.com/issues/appcoda-weekly-issue-130-186576)
-* [AwesomeiOS Weekly](http://weekly.awesomeios.com/issues/27)
-
-## Contributing
-Contributions are very welcome 🙌
-
 ## License
 
 ```
 ValidatedPropertyKit
-Copyright (c) 2021 Sven Tiigi sven.tiigi@gmail.com
+Copyright (c) 2022 Sven Tiigi sven.tiigi@gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
