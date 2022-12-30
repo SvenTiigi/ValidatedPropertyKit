@@ -103,7 +103,7 @@ If you prefer not to use any of the aforementioned dependency managers, you can 
 
 The `@Validated` attribute allows you to specify a validation alongside to the declaration of your property.
 
-> ☝️ @Validated supports SwiftUI View updates and will basically work the same way as @State does.
+> **Note**: @Validated supports SwiftUI View updates and will basically work the same way as @State does.
 
 ```swift
 @Validated(!.isEmpty)
