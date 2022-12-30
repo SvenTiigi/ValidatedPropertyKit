@@ -35,7 +35,7 @@ public struct Validated<Value>: Validatable, DynamicProperty {
         get {
             self.projectedValue.wrappedValue
         }
-        set {
+        nonmutating set {
             self.projectedValue.wrappedValue = newValue
         }
     }
