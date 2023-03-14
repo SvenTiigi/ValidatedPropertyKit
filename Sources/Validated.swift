@@ -129,3 +129,15 @@ public extension Validated {
     }
     
 }
+
+// MARK: - Validated+reset
+
+public extension Validated {
+
+    /// A Boolean value if the value is invalid and has been previously modified
+    func reset() {
+        self.hasChanges = false
+    }
+
+}
+
