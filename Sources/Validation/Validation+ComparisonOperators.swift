@@ -3,7 +3,6 @@ import Foundation
 // MARK: - Validation+Equal
 
 public extension Validation {
-    
     /// Returns a Validation where two given Validation results will be compared to equality
     /// - Parameters:
     ///   - lhs: The left-hand side of the operation
@@ -13,16 +12,14 @@ public extension Validation {
         rhs: Self
     ) -> Self {
         .init { value in
-            lhs.validate(value) == rhs.validate(value)
+            lhs.validateCatched(value) == rhs.validateCatched(value)
         }
     }
-    
 }
 
 // MARK: - Validation+Unequal
 
 public extension Validation {
-    
     /// Returns a Validation where two given Validation results will be compared to unequality
     /// - Parameters:
     ///   - lhs: The left-hand side of the operation
@@ -32,8 +29,7 @@ public extension Validation {
         rhs: Self
     ) -> Self {
         .init { value in
-            lhs.validate(value) != rhs.validate(value)
+            lhs.validateCatched(value) != rhs.validateCatched(value)
         }
     }
-    
 }

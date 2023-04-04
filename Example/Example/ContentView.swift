@@ -1,13 +1,17 @@
 import Combine
+import RegexBuilder
 import SwiftUI
 import ValidatedPropertyKit
 
 final class ContentModel: ObservableObject {
-    @PublishedValidated(.range(3...))
+    @PublishedValidated(
+        .range(3..., error: "Username is too short")
+            && .regex(Regex { OneOrMore(.digit) }, error: "Requires 1+ digits")
+    )
     var username = "" {
         didSet {
             usernameInvalid = !_username.isValid
-            usernameInvalidAfterChanges = _username.isInvalidAfterChanges
+            usernameError = _username.error
         }
     }
 
@@ -15,11 +19,11 @@ final class ContentModel: ObservableObject {
     var usernameInvalid = true
 
     @Published
-    var usernameInvalidAfterChanges = false
+    var usernameError: String? = nil
 }
 
 struct ContentView {
-    @Validated(!.isEmpty)
+    @Validated(!.isEmpty(message: "Username is not valid"))
     var username = String()
 
     @ObservedObject
@@ -63,7 +67,7 @@ extension ContentView: View {
                     header: Text(verbatim: "View Model Username"),
                     footer: Group {
                         Text(
-                            verbatim: model.usernameInvalidAfterChanges ? "Username is not valid" : ""
+                            verbatim: model.usernameError ?? ""
                         )
                         .foregroundColor(.red)
                     }
@@ -90,3 +94,11 @@ extension ContentView: View {
         }
     }
 }
+
+#if DEBUG
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+#endif

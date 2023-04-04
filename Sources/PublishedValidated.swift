@@ -26,6 +26,9 @@ public final class PublishedValidated<Value>: ObservableObject, Validatable {
     @Published
     public private(set) var isValid: Bool
 
+    @Published
+    public private(set) var error: String?
+
     public var wrappedValue: Value {
         get {
             return value
@@ -59,7 +62,16 @@ public final class PublishedValidated<Value>: ObservableObject, Validatable {
     }
 
     public func validate() {
-        isValid = validation.validate(value)
+        do {
+            try validation.validate(value)
+            isValid = true
+            self.error = nil
+        } catch {
+            self.error = error as? String
+            isValid = false
+        }
+        
+        
     }
 
     public init(
@@ -73,7 +85,7 @@ public final class PublishedValidated<Value>: ObservableObject, Validatable {
         )
 
         _isValid = .init(
-            initialValue: validation.validate(wrappedValue)
+            initialValue: validation.validateCatched(wrappedValue)
         )
     }
 }
