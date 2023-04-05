@@ -10,7 +10,7 @@
 		3D5D898A281D511A00DD9301 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D5D8989281D511A00DD9301 /* Assets.xcassets */; };
 		3D7BB5D827A46B8C009D4145 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7BB5D727A46B8C009D4145 /* App.swift */; };
 		3D7BB5DA27A46B8C009D4145 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7BB5D927A46B8C009D4145 /* ContentView.swift */; };
-		3D7BB5E827A46BA4009D4145 /* ValidatedPropertyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3D7BB5E727A46BA4009D4145 /* ValidatedPropertyKit */; };
+		EDE7521229D7099D00FDB406 /* ValidatedPropertyKit in Frameworks */ = {isa = PBXBuildFile; productRef = EDE7521129D7099D00FDB406 /* ValidatedPropertyKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,7 +18,7 @@
 		3D7BB5D427A46B8C009D4145 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D7BB5D727A46B8C009D4145 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		3D7BB5D927A46B8C009D4145 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		3D7BB5E527A46B9F009D4145 /* ValidatedPropertyKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ValidatedPropertyKit; path = ..; sourceTree = "<group>"; };
+		EDE7521029D7097B00FDB406 /* ValidatedPropertyKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ValidatedPropertyKit; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,7 +26,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D7BB5E827A46BA4009D4145 /* ValidatedPropertyKit in Frameworks */,
+				EDE7521229D7099D00FDB406 /* ValidatedPropertyKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,10 +36,10 @@
 		3D7BB5CB27A46B8C009D4145 = {
 			isa = PBXGroup;
 			children = (
+				EDE7521029D7097B00FDB406 /* ValidatedPropertyKit */,
 				3D7BB5D627A46B8C009D4145 /* Example */,
 				3D7BB5D527A46B8C009D4145 /* Products */,
 				3D7BB5E627A46BA4009D4145 /* Frameworks */,
-				3D7BB5E527A46B9F009D4145 /* ValidatedPropertyKit */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,7 +85,7 @@
 			);
 			name = Example;
 			packageProductDependencies = (
-				3D7BB5E727A46BA4009D4145 /* ValidatedPropertyKit */,
+				EDE7521129D7099D00FDB406 /* ValidatedPropertyKit */,
 			);
 			productName = Example;
 			productReference = 3D7BB5D427A46B8C009D4145 /* Example.app */;
@@ -279,6 +279,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,6 +308,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -344,7 +346,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3D7BB5E727A46BA4009D4145 /* ValidatedPropertyKit */ = {
+		EDE7521129D7099D00FDB406 /* ValidatedPropertyKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ValidatedPropertyKit;
 		};
