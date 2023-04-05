@@ -10,7 +10,7 @@ import SwiftUI
 
 @available(iOS 14.0, *)
 @propertyWrapper
-public final class PublishedValidated<Value>: ObservableObject, Validatable {
+public final class PublishedValidated<Value: Equatable>: ObservableObject, Validatable {
     public var validation: Validation<Value> {
         didSet {
             validate()
@@ -34,6 +34,8 @@ public final class PublishedValidated<Value>: ObservableObject, Validatable {
             return value
         }
         set {
+            if newValue == value { return }
+
             value = newValue
             validate()
 
@@ -61,17 +63,19 @@ public final class PublishedValidated<Value>: ObservableObject, Validatable {
         hasChanges && !isValid
     }
 
+    public var errorAfterChanges: String? {
+        isInvalidAfterChanges ? error : nil
+    }
+
     public func validate() {
         do {
             try validation.validate(value)
             isValid = true
-            self.error = nil
+            error = nil
         } catch {
             self.error = error as? String
             isValid = false
         }
-        
-        
     }
 
     public init(

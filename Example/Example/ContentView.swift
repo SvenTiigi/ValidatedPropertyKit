@@ -11,7 +11,7 @@ final class ContentModel: ObservableObject {
     var username = "" {
         didSet {
             usernameInvalid = !_username.isValid
-            usernameError = _username.error
+            usernameError = _username.errorAfterChanges
         }
     }
 
