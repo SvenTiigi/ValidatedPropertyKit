@@ -3,12 +3,12 @@ import Foundation
 // MARK: - Validation+Collection
 
 public extension Validation where Value: Collection {
-    static func isEmpty(message: String? = nil) -> Self {
+    static func isEmpty(error: String? = nil) -> Self {
         .init(
             predicate: { value in
                 value.isEmpty
             },
-            error: message
+            error: error
         )
     }
 

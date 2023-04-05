@@ -23,7 +23,7 @@ final class ContentModel: ObservableObject {
 }
 
 struct ContentView {
-    @Validated(!.isEmpty(message: "Username is not valid"))
+    @Validated(!.isEmpty(error: "Username is not valid"))
     var username = String()
 
     @ObservedObject
