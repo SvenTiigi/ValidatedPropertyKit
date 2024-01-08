@@ -3,22 +3,26 @@ import Foundation
 // MARK: - Validation+Collection
 
 public extension Validation where Value: Collection {
-    
-    /// The isEmpty Validation
-    static var isEmpty: Self {
-        .init { value in
-            value.isEmpty
-        }
+    static func isEmpty(error: String? = nil) -> Self {
+        .init(
+            predicate: { value in
+                value.isEmpty
+            },
+            error: error
+        )
     }
-    
+
     /// Validation with RangeExpression
     /// - Parameter range: The RangeExpression
     static func range<R: RangeExpression>(
-        _ range: @autoclosure @escaping () -> R
+        _ range: @autoclosure @escaping () -> R,
+        error: String? = nil
     ) -> Self where R.Bound == Int {
-        .init { value in
-            range().contains(value.count)
-        }
+        .init(
+            predicate: { value in
+                range().contains(value.count)
+            },
+            error: error
+        )
     }
-    
 }

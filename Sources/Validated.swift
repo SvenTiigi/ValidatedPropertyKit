@@ -5,14 +5,12 @@ import SwiftUI
 /// A Validated PropertyWrapper
 @propertyWrapper
 public struct Validated<Value>: Validatable, DynamicProperty {
-    
     // MARK: Properties
     
     /// The Validation
     public var validation: Validation<Value> {
         didSet {
-            // Re-Validate
-            self.isValid = self.validation.validate(self.value)
+            self.revalidate()
         }
     }
     
@@ -51,7 +49,8 @@ public struct Validated<Value>: Validatable, DynamicProperty {
                 if !self.hasChanges {
                     self.hasChanges.toggle()
                 }
-                self.isValid = self.validation.validate(newValue)
+                
+                revalidate()
             }
         )
     }
@@ -67,13 +66,15 @@ public struct Validated<Value>: Validatable, DynamicProperty {
         _ validation: Validation<Value>
     ) {
         self.validation = validation
-        self._value = .init(
-            initialValue: wrappedValue
-        )
-        self._isValid = .init(
-            initialValue: validation
-                .validate(wrappedValue)
-        )
+        self._value = .init(initialValue: wrappedValue)
+        
+        var isValid = false
+        do {
+            try validation.validate(wrappedValue)
+            isValid = true
+        } catch {}
+        
+        self._isValid = .init(initialValue: isValid)
     }
     
     /// Creates a new instance of `Validated`
@@ -95,39 +96,45 @@ public struct Validated<Value>: Validatable, DynamicProperty {
         )
     }
     
+    func revalidate() {
+        self.isValid = self.validate()
+    }
+    
+    func validate() -> Bool {
+        do {
+            try self.validation.validate(self.value)
+            return true
+        } catch {
+            return false
+        }
+    }
 }
 
 // MARK: - Validated+validatedValue
 
 public extension Validated {
-    
     /// The value if is valid otherwise returns `nil`
     var validatedValue: Value? {
         self.isValid ? self.value : nil
     }
-    
 }
 
 // MARK: - Validated+isInvalid
 
 public extension Validated {
-    
     /// A Boolean value if the value is invalid
     var isInvalid: Bool {
         !self.isValid
     }
-    
 }
 
 // MARK: - Validated+isInvalidAfterChanges
 
 public extension Validated {
-    
     /// A Boolean value if the value is invalid and has been previously modified
     var isInvalidAfterChanges: Bool {
         self.hasChanges && !self.isValid
     }
-    
 }
 
 // MARK: - Validated+reset
